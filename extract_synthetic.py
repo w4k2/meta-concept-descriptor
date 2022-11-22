@@ -6,7 +6,7 @@ from utils import find_real_drift
 import time
 from tqdm import tqdm
 
-replications = 1
+replications = 5
 random_states = np.random.randint(100,10000,replications)
 
 drift_types = {
