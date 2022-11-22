@@ -6,7 +6,7 @@ from utils import find_real_drift
 import time
 from tqdm import tqdm
 
-replications = 10
+replications = 1
 random_states = np.random.randint(100,10000,replications)
 
 drift_types = {
@@ -14,7 +14,6 @@ drift_types = {
     'gradual': {'concept_sigmoid_spacing':5, 'n_drifts': 6},
     'incremental': {'concept_sigmoid_spacing':5, 'incremental':True, 'n_drifts': 6}
 }
-
 
 stream_static = {
                 'n_chunks': 5000,
@@ -26,28 +25,29 @@ stream_static = {
             }
 
 measures = ["clustering",
-            "complexity",
-            "concept",
-            "general",
-            "info-theory",
-            "itemset",
-            "landmarking",
-            "model-based",
-            "statistical"
-            ]
+        "complexity",
+        "concept",
+        "general",
+        "info-theory",
+        "itemset",
+        "landmarking",
+        "model-based",
+        "statistical"
+        ]
+
 measures_len = [
     8,
-    22,
-    4, 
-    11,
-    8,
-    2,
-    7,
+    35,
+    8, 
+    12,
+    13,
+    4,
     14,
-    28
+    24,
+    48
 ]
 
-pbar = tqdm(total=len(drift_types) * len(random_states))
+pbar = tqdm(total=len(drift_types) * len(random_states) * stream_static['n_chunks'])
 
 for m_id, measure_key in enumerate(measures):
     
@@ -119,9 +119,11 @@ for m_id, measure_key in enumerate(measures):
                 
                 mfe = MFE(groups=[measure_key])
                 mfe.fit(X,y)
-                ft = mfe.extract()[1]
+                ft_labels, ft = mfe.extract()
+                # print(ft_labels, len(ft))
                 
                 out[dt_id, rep, chunk, :-1] = ft
                 out[dt_id, rep, chunk, -1] = concept
+                pbar.update(1)
                 
     np.save('res/%s.npy' % measure_key, out)
