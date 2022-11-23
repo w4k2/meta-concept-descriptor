@@ -28,11 +28,11 @@ measures = ["clustering",
 pbar = tqdm(total=len(real_streams))
 
 for m_id, measure_key in enumerate(measures):
-    
-    out = []
     print(measure_key)
     
     for f_id, f in enumerate(real_streams):
+        out = []
+
         fname=(f.split('/')[1]).split('.')[0]
 
         if 'electricity' in f:
