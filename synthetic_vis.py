@@ -4,11 +4,11 @@ from sklearn.feature_selection import SelectKBest
 from sklearn.neural_network import MLPClassifier
 
 measures = ["clustering",
-        # "complexity",
-        # "concept",
-        # "general",
-        # "info-theory",
-        # "itemset",
+        "complexity",
+        "concept",
+        "general",
+        "info-theory",
+        "itemset",
         "landmarking",
         "model-based",
         "statistical"
