@@ -1,5 +1,4 @@
 import numpy as np
-import pandas as pd
 from scipy.interpolate import interp1d
 from scipy.spatial.distance import euclidean
 
@@ -309,20 +308,3 @@ class SemiSyntheticStreamGenerator:
         X, y = self._make_stream()
         ds = np.concatenate([X, y[:, np.newaxis]], axis=1)
         np.save(filepath, ds)
-
-
-    def save_to_csv(self, filepath):
-        """
-        Save generated stream to the csv format file.
-
-        :param filepath: Path to the file where data will be saved in csv format.
-        :type filepath: string
-        """
-        X, y = self._make_classification()
-
-        ds = np.concatenate([X, y[:, np.newaxis]], axis=1)
-
-        pdds = pd.DataFrame(ds)
-        pdds.infer_objects()
-        pdds.iloc[: , -1] = pdds.iloc[: , -1].astype(int)
-        pdds.to_csv(filepath, header=None,index=None)
