@@ -1,5 +1,4 @@
 import numpy as np
-from SSG import SemiSyntheticStreamGenerator
 from pymfe.mfe import MFE
 from tqdm import tqdm
 import strlearn as sl
@@ -13,9 +12,7 @@ real_streams = [
     'real_streams/INSECTS-incremental_imbalanced_norm.arff'
     ]
 
-stream_static = {
-                'chunk_size': 400,
-            }
+stream_static = { 'chunk_size': 400 }
 
 measures = ["clustering",
         "complexity",
@@ -62,4 +59,4 @@ for m_id, measure_key in enumerate(measures):
                 
                 out.append(ft)
                 
-        np.save('res/real_%s_%s.npy' % (fname, measure_key), np.array(out))
+        np.save('res/real_%i_%s.npy' % (f_id, measure_key), np.array(out))
