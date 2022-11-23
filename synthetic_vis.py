@@ -46,6 +46,6 @@ for m in measures:
                     ax[i,j].scatter(X[:,i], X[:,j],c=y, alpha=0.05, s=1)
                 
             plt.tight_layout()
-            plt.savefig('fig/%s_%s_%i.png' % (m, drf, r))
+            plt.savefig('fig_syn/%s_%s_%i.png' % (m, drf, r))
             plt.savefig('foo.png')
             
