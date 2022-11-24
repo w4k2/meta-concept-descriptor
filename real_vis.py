@@ -39,7 +39,8 @@ for f_id in range(len(real_streams)):
         
         X = res[:,:-1]
         y = res[:,-1]
-        # print(np.unique(y))
+        
+        print(f_id, np.unique(y))
         # continue  
         #EH
         X[np.isnan(X)]=1
