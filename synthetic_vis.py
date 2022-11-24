@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.feature_selection import SelectKBest
 from sklearn.neural_network import MLPClassifier
+import utils
 
 measures = ["clustering",
         "complexity",
@@ -14,7 +15,7 @@ measures = ["clustering",
         "statistical"
         ]
 
-for m in measures:
+for m_id, m in enumerate(measures):
     res = np.load('res/%s.npy' % m)
     print(res.shape) # drfs, reps, chunks, measures + label
     
@@ -30,21 +31,26 @@ for m in measures:
                 
             #EH
             X[np.isnan(X)]=1
-            
+            names = [n[:6] for n in utils.measure_labels[m_id]]
+
             if  X.shape[1]>8:
                 # Feature Selection
                 skb = SelectKBest(k=8)
                 X = skb.fit_transform(X, y)
+                names = skb.get_feature_names_out(input_features=names)
                                     
-            fig, ax = plt.subplots(X.shape[1],X.shape[1],figsize=(12,12))
+            fig, ax = plt.subplots(X.shape[1],X.shape[1],figsize=(10,10))
             plt.suptitle('%s %s rep:%i' % (m, drf, r))
             for i in range(X.shape[1]):
                 for j in range(X.shape[1]):
                     ax[i,j].cla()
                     ax[i,j].set_yticks([])
                     ax[i,j].set_xticks([])
-                    ax[i,j].scatter(X[:,i], X[:,j], c=y, alpha=1/100, s=100, edgecolors=None)
-                
+                    ax[i,j].scatter(X[:,i], X[:,j], c=y, linewidth=0, alpha=0.05, s=5, edgecolors=None, cmap='rainbow')
+                    if j==0:
+                        ax[i,j].set_ylabel(names[i])
+                    if i==X.shape[1]-1:
+                        ax[i,j].set_xlabel(names[j])
             plt.tight_layout()
             plt.savefig('fig_syn/%s_%s_%i.png' % (m, drf, r))
             plt.savefig('foo.png')

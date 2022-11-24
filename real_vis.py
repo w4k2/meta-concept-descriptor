@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import utils
 from sklearn.neural_network import MLPClassifier
 from sklearn.decomposition import PCA
 
@@ -24,27 +25,23 @@ real_streams = [
     ]
 
 for f_id in range(len(real_streams)):
-    for m in measures:
-        print(f_id)
+    for m_id, m in enumerate(measures):
         res = np.load('res/real_%s_%s.npy' % (f_id, m))
         if res.shape[0]==0:
-            print(f_id)
             continue
         # print(f_id, m)
-        print(res.shape) # drfs, reps, chunks, measures + label
-        # print(res[0]) # drfs, reps, chunks, measures + label
-        # exit()
+        # print(res.shape) # drfs, reps, chunks, measures + label
         perm = np.random.permutation(res.shape[0])
         res = res[perm]
         
         X = res[:,:-1]
         y = res[:,-1]
+        # print(f_id, np.unique(y))
         
-        print(f_id, np.unique(y))
-        # continue  
         #EH
         X[np.isnan(X)]=1
         X[np.isinf(X)]=1
+        names = [n[:6] for n in utils.measure_labels[m_id]]
         
         if  X.shape[1]>8:
             # Feature Selection
@@ -53,7 +50,8 @@ for f_id in range(len(real_streams)):
             av = np.sum(np.abs(pca.components_), axis=0)
             av_s=np.flip(np.argsort(av))[:8]
             
-            X = X[:,av_s]           
+            X = X[:,av_s]     
+            names = np.array(names)[av_s]      
 
         fig, ax = plt.subplots(X.shape[1],X.shape[1],figsize=(12,12))
         plt.suptitle('%s %s' % (m, real_streams[f_id]))
@@ -62,8 +60,11 @@ for f_id in range(len(real_streams)):
                 ax[i,j].cla()
                 ax[i,j].set_yticks([])
                 ax[i,j].set_xticks([])
-                ax[i,j].scatter(X[:,i], X[:,j], c=y, alpha=0.1, s=10)
-            
+                ax[i,j].scatter(X[:,i], X[:,j], c=y, linewidth=0, alpha=0.2, s=20, edgecolors=None, cmap='rainbow')
+                if j==0:
+                    ax[i,j].set_ylabel(names[i])
+                if i==X.shape[1]-1:
+                    ax[i,j].set_xlabel(names[j])                    
         plt.tight_layout()
         plt.savefig('fig_rel/%s_%i.png' % (m, f_id))
         plt.savefig('foo.png')

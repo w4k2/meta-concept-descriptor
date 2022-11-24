@@ -1,3 +1,4 @@
+import utils
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.feature_selection import SelectKBest
@@ -22,7 +23,7 @@ static_data = ['australian',
                'wisconsin'
                ]
 
-for m in measures:
+for m_id, m in enumerate(measures):
     res = np.load('res/semi_%s.npy' % m)
     print(res.shape) # datasets, drifts, reps, chunks, measures + label
     for dataset_id, dataset in enumerate(static_data):
@@ -37,11 +38,14 @@ for m in measures:
                     
                 #EH
                 X[np.isnan(X)]=1
-                
+                names = [n[:6] for n in utils.measure_labels[m_id]]
+
                 if  X.shape[1]>8:
                     # Feature Selection
                     skb = SelectKBest(k=8)
                     X = skb.fit_transform(X, y)
+                    names = skb.get_feature_names_out(input_features=names)
+                    
                                         
                 fig, ax = plt.subplots(X.shape[1],X.shape[1],figsize=(12,12))
                 plt.suptitle('%s %s %s rep:%i' % (m, drf, static_data[dataset_id], r))
@@ -50,8 +54,11 @@ for m in measures:
                         ax[i,j].cla()
                         ax[i,j].set_yticks([])
                         ax[i,j].set_xticks([])
-                        ax[i,j].scatter(X[:,i], X[:,j], c=y, alpha=0.005, s=50, edgecolors=None, cmap='Set1')
-                    
+                        ax[i,j].scatter(X[:,i], X[:,j], c=y, linewidth=0, alpha=0.05, s=5, edgecolors=None, cmap='rainbow')
+                        if j==0:
+                            ax[i,j].set_ylabel(names[i])
+                        if i==X.shape[1]-1:
+                            ax[i,j].set_xlabel(names[j])                    
                 plt.tight_layout()
                 plt.savefig('fig_semi/%s_%s_%s_%i.png' % (m, drf, static_data[dataset_id], r))
                 plt.savefig('foo.png')
