@@ -35,13 +35,10 @@ for m_id, measure_key in enumerate(measures):
 
         fname=(f.split('/')[1]).split('.')[0]
 
-        if 'npy' in f:
-            stream = sl.streams.NPYParser(f, chunk_size=stream_static['chunk_size'], n_chunks=100000)
-        else:
-            stream = sl.streams.ARFFParser(f, chunk_size=stream_static['chunk_size'], n_chunks=100000)
-
+        stream = sl.streams.NPYParser(f, chunk_size=stream_static['chunk_size'], n_chunks=100000)
+        
         for chunk in range(100000):
-            
+                           
             # CALCULATE
             try:
                 X, y = stream.get_chunk()
