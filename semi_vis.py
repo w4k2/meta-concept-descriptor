@@ -50,7 +50,7 @@ for m in measures:
                         ax[i,j].cla()
                         ax[i,j].set_yticks([])
                         ax[i,j].set_xticks([])
-                        ax[i,j].scatter(X[:,i], X[:,j],c=y, alpha=0.05, s=1)
+                        ax[i,j].scatter(X[:,i], X[:,j], c=y, alpha=0.005, s=50, edgecolors=None, cmap='Set1')
                     
                 plt.tight_layout()
                 plt.savefig('fig_semi/%s_%s_%s_%i.png' % (m, drf, static_data[dataset_id], r))

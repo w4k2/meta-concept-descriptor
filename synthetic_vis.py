@@ -43,7 +43,7 @@ for m in measures:
                     ax[i,j].cla()
                     ax[i,j].set_yticks([])
                     ax[i,j].set_xticks([])
-                    ax[i,j].scatter(X[:,i], X[:,j],c=y, alpha=0.05, s=1)
+                    ax[i,j].scatter(X[:,i], X[:,j], c=y, alpha=1/100, s=100, edgecolors=None)
                 
             plt.tight_layout()
             plt.savefig('fig_syn/%s_%s_%i.png' % (m, drf, r))

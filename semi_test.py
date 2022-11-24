@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 drift_type = {'interpolation':'cubic', 'n_drifts': 6}
 
-static_data = 'static_data/wisconsin.csv'
+static_data = 'static_data/banknote.csv'
 
 stream_static = {
                 'n_chunks': 5000,

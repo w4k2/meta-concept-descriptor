@@ -35,28 +35,28 @@ for m_id, measure_key in enumerate(measures):
 
         fname=(f.split('/')[1]).split('.')[0]
 
-        if 'electricity' in f:
+        if 'npy' in f:
             stream = sl.streams.NPYParser(f, chunk_size=stream_static['chunk_size'], n_chunks=100000)
         else:
             stream = sl.streams.ARFFParser(f, chunk_size=stream_static['chunk_size'], n_chunks=100000)
 
-            for chunk in range(100000):
-                
-                # CALCULATE
-                try:
-                    X, y = stream.get_chunk()
-                except Exception as e:
-                    print(e)
-                    break
-                     
-                if len(np.unique(y))<2:
-                    print('skip', chunk)
-                    continue
-                                   
-                mfe = MFE(groups=[measure_key])
-                mfe.fit(X,y)
-                ft_labels, ft = mfe.extract()
-                
-                out.append(ft)
+        for chunk in range(100000):
+            
+            # CALCULATE
+            try:
+                X, y = stream.get_chunk()
+            except Exception as e:
+                print(e)
+                break
+                    
+            if len(np.unique(y))<2:
+                print('skip', chunk)
+                continue
+                                
+            mfe = MFE(groups=[measure_key])
+            mfe.fit(X,y)
+            ft_labels, ft = mfe.extract()
+            
+            out.append(ft)
                 
         np.save('res/real_%i_%s.npy' % (f_id, measure_key), np.array(out))

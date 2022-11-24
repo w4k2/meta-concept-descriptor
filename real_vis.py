@@ -26,10 +26,13 @@ real_streams = [
 for f_id in range(len(real_streams)):
     for m in measures:
         res = np.load('res/real_%s_%s.npy' % (f_id, m))
+        if res.shape[0]==0:
+            print(f_id)
+            continue
+        # print(f_id, m)
         print(res.shape) # drfs, reps, chunks, measures + label
-
         perm = np.random.permutation(res.shape[1])
-        res_iter = res[:,perm]
+        res = res[:,perm]
         
         X = res
             
