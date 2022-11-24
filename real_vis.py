@@ -23,6 +23,7 @@ real_streams = [
     'INSECTS-gradual',
     'INSECTS-incremental'
     ]
+limit=5
 
 for f_id in range(len(real_streams)):
     for m_id, m in enumerate(measures):
@@ -43,17 +44,17 @@ for f_id in range(len(real_streams)):
         X[np.isinf(X)]=1
         names = [n[:6] for n in utils.measure_labels[m_id]]
         
-        if  X.shape[1]>8:
+        if  X.shape[1]>limit:
             # Feature Selection
             pca = PCA(n_components=int(np.rint(np.sqrt(X.shape[1]))))
             pca.fit(X)
             av = np.sum(np.abs(pca.components_), axis=0)
-            av_s=np.flip(np.argsort(av))[:8]
+            av_s=np.flip(np.argsort(av))[:limit]
             
             X = X[:,av_s]     
             names = np.array(names)[av_s]      
 
-        fig, ax = plt.subplots(X.shape[1],X.shape[1],figsize=(12,12))
+        fig, ax = plt.subplots(X.shape[1],X.shape[1],figsize=(7,7))
         plt.suptitle('%s %s' % (m, real_streams[f_id]))
         for i in range(X.shape[1]):
             for j in range(X.shape[1]):

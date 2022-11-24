@@ -2,7 +2,6 @@ import utils
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.feature_selection import SelectKBest
-from sklearn.neural_network import MLPClassifier
 
 measures = ["clustering",
         "complexity",
@@ -22,6 +21,7 @@ static_data = ['australian',
                'vowel0',
                'wisconsin'
                ]
+limit=5
 
 for m_id, m in enumerate(measures):
     res = np.load('res/semi_%s.npy' % m)
@@ -40,14 +40,14 @@ for m_id, m in enumerate(measures):
                 X[np.isnan(X)]=1
                 names = [n[:6] for n in utils.measure_labels[m_id]]
 
-                if  X.shape[1]>8:
+                if  X.shape[1]>limit:
                     # Feature Selection
-                    skb = SelectKBest(k=8)
+                    skb = SelectKBest(k=limit)
                     X = skb.fit_transform(X, y)
                     names = skb.get_feature_names_out(input_features=names)
                     
                                         
-                fig, ax = plt.subplots(X.shape[1],X.shape[1],figsize=(12,12))
+                fig, ax = plt.subplots(X.shape[1],X.shape[1],figsize=(7,7))
                 plt.suptitle('%s %s %s rep:%i' % (m, drf, static_data[dataset_id], r))
                 for i in range(X.shape[1]):
                     for j in range(X.shape[1]):

@@ -15,6 +15,8 @@ measures = ["clustering",
         "statistical"
         ]
 
+limit=5
+
 for m_id, m in enumerate(measures):
     res = np.load('res/%s.npy' % m)
     print(res.shape) # drfs, reps, chunks, measures + label
@@ -33,13 +35,13 @@ for m_id, m in enumerate(measures):
             X[np.isnan(X)]=1
             names = [n[:6] for n in utils.measure_labels[m_id]]
 
-            if  X.shape[1]>8:
+            if  X.shape[1]>limit:
                 # Feature Selection
-                skb = SelectKBest(k=8)
+                skb = SelectKBest(k=limit)
                 X = skb.fit_transform(X, y)
                 names = skb.get_feature_names_out(input_features=names)
                                     
-            fig, ax = plt.subplots(X.shape[1],X.shape[1],figsize=(10,10))
+            fig, ax = plt.subplots(X.shape[1],X.shape[1],figsize=(7,7))
             plt.suptitle('%s %s rep:%i' % (m, drf, r))
             for i in range(X.shape[1]):
                 for j in range(X.shape[1]):
