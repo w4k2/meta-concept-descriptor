@@ -12,7 +12,7 @@ real_streams = [
     'real_streams/INSECTS-incremental_imbalanced_norm.arff'
     ]
 
-stream_static = { 'chunk_size': 400 }
+stream_static = { 'chunk_size': 300 }
 
 measures = ["clustering",
         "complexity",
@@ -31,13 +31,20 @@ for m_id, measure_key in enumerate(measures):
     print(measure_key)
     
     for f_id, f in enumerate(real_streams):
-        out = []
-
         fname=(f.split('/')[1]).split('.')[0]
 
-        stream = sl.streams.NPYParser(f, chunk_size=stream_static['chunk_size'], n_chunks=100000)
+        drfs = np.load('real_streams_gt/%s.npy' % fname)
+        
+        concept=0
+        out = []
+        
+        stream = sl.streams.NPYParser('real_streams_pr/%s.npy' % fname, chunk_size=stream_static['chunk_size'], n_chunks=100000)
         
         for chunk in range(100000):
+            # GET CONCEPT
+            if chunk in drfs:
+                concept+=1
+                # print(concept)
                            
             # CALCULATE
             try:
@@ -47,13 +54,17 @@ for m_id, measure_key in enumerate(measures):
                 break
                     
             if len(np.unique(y))<2:
-                print('skip', chunk)
+                # print('skip', chunk)
                 continue
+                # exit()
                                 
             mfe = MFE(groups=[measure_key])
             mfe.fit(X,y)
             ft_labels, ft = mfe.extract()
-            
+            ft.append(concept)
+
             out.append(ft)
+        # print(np.array(out).shape)
+        # exit()
                 
         np.save('res/real_%i_%s.npy' % (f_id, measure_key), np.array(out))

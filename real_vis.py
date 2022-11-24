@@ -25,19 +25,25 @@ real_streams = [
 
 for f_id in range(len(real_streams)):
     for m in measures:
+        print(f_id)
         res = np.load('res/real_%s_%s.npy' % (f_id, m))
         if res.shape[0]==0:
             print(f_id)
             continue
         # print(f_id, m)
         print(res.shape) # drfs, reps, chunks, measures + label
-        perm = np.random.permutation(res.shape[1])
-        res = res[:,perm]
+        # print(res[0]) # drfs, reps, chunks, measures + label
+        # exit()
+        perm = np.random.permutation(res.shape[0])
+        res = res[perm]
         
-        X = res
-            
+        X = res[:,:-1]
+        y = res[:,-1]
+        # print(np.unique(y))
+        # continue  
         #EH
         X[np.isnan(X)]=1
+        X[np.isinf(X)]=1
         
         if  X.shape[1]>8:
             # Feature Selection
@@ -55,7 +61,7 @@ for f_id in range(len(real_streams)):
                 ax[i,j].cla()
                 ax[i,j].set_yticks([])
                 ax[i,j].set_xticks([])
-                ax[i,j].scatter(X[:,i], X[:,j], alpha=0.1, s=10)
+                ax[i,j].scatter(X[:,i], X[:,j], c=y, alpha=0.1, s=10)
             
         plt.tight_layout()
         plt.savefig('fig_rel/%s_%i.png' % (m, f_id))

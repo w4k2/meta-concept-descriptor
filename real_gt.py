@@ -1,11 +1,11 @@
 import numpy as np
 from sklearn.naive_bayes import GaussianNB
+from sklearn.neural_network import MLPClassifier
 from detectors.ADWIN import ADWIN
 from detectors.meta import Meta
-from pymfe.mfe import MFE
 from tqdm import tqdm
 import strlearn as sl
-
+import matplotlib.pyplot as plt
 real_streams = [
     'real_streams/covtypeNorm-1-2vsAll-pruned.arff',
     'real_streams/electricity.npy',
@@ -69,13 +69,38 @@ for f_id, f in enumerate(real_streams):
     
     stream = sl.streams.NPYParser('real_streams_pr/%s.npy' % fname, chunk_size=stream_static['chunk_size'], n_chunks=_chunks)
     
-    clf = Meta(base_clf=GaussianNB(), detector=ADWIN())
+    # clf =MLPClassifier()
+    # clf = [GaussianNB(), MLPClassifier()]
+    # # clf = Meta(base_clf=GaussianNB(), detector=ADWIN())
     
-    evaluator = sl.evaluators.TestThenTrain()
-    evaluator.process(stream, clf)
+    # evaluator = sl.evaluators.TestThenTrain()
+    # evaluator.process(stream, clf)
+    # # print(evaluator.scores.shape)
+    # exit()
     
-    drfs = np.argwhere(np.array(clf.detector.drift)==2).flatten()+1
-    print(drfs)
+    # fig, ax = plt.subplots(1,1,figsize=(20,10))
+    
+    # plt.plot(evaluator.scores[0,:,1])
+    # plt.plot(evaluator.scores[1,:,1])
+    # plt.xticks(np.linspace(0,250,30))
+    # plt.grid()
+    # plt.savefig('foo.png')
+    
+    if f_id==0:
+        drfs=[55,120,130,155,260,295,300,320,330,350]
+    if f_id==1:
+        drfs=[20,38,60,70,115,145]
+    if f_id==2:
+        drfs=[45,90,110,120,160,182,245,275,292,320,358,400,450,468,480,516,540,550,590,600,640,710,790,831,850,880,900,920,965,1000,1010]
+    if f_id==3:
+        drfs=[]
+    if f_id==4:
+        drfs=[9,60,70,90,190]
+    if f_id==5:
+        drfs=[9,35,180,220]
+        
+    # drfs = np.argwhere(np.array(clf.detector.drift)==2).flatten()+1
+    # print(drfs)
     np.save('real_streams_gt/%s.npy' % fname, drfs)
     
     # exit()
