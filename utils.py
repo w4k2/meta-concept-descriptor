@@ -27,3 +27,57 @@ measure_labels = [
     model_based,
     statistical
 ]
+
+from sklearn.base import BaseEstimator, ClassifierMixin
+
+class ELMI(BaseEstimator, ClassifierMixin):
+    def __init__(self, hidden_layer_size=1024, 
+                 probing_rate=.1,
+                 update_rate=.1):
+        self.hidden_layer_size = hidden_layer_size
+        self.probing_rate = probing_rate
+        self.update_rate = update_rate
+
+    def partial_fit(self, X, y, classes=None):
+        
+        if classes is None:
+            classes = np.unique(y)
+        if not hasattr(self, 'enc'):
+            self.enc = np.arange(len(classes))
+        _y = (np.array([yi==self.enc for yi in y]).astype(int))
+
+        # Check if first
+        if not hasattr(self, 'beta_'):
+            # Get problem info
+            self.n_classes = _y.shape[1]
+            self.n_features = X.shape[1]
+            
+            # Initialize W
+            self.coefs_ = np.random.uniform(-1, 1, size=(self.n_features,
+                                                         self.hidden_layer_size))
+            # Initialize bias
+            self.intercepts_ = np.random.normal(size=(self.hidden_layer_size,))
+                    
+            # Initialize empty beta
+            self.beta_ = np.zeros((self.hidden_layer_size, self.n_classes))
+        
+        pmask = np.random.uniform(size=_y.shape[0]) < self.probing_rate
+        
+        H = self.activation(X[pmask].dot(self.coefs_) + self.intercepts_)  # Propagate
+        H_pinv = np.linalg.pinv(H)                                  # Inverse by Moore–Penrose
+        
+        # Calculate partial beta and update beta
+        partial_beta = H_pinv.dot(_y[pmask]) 
+        self.beta_ = self.beta_ * (1-self.update_rate) + partial_beta * self.update_rate
+
+        return self
+
+    def predict_proba(self, X):
+        H = self.activation(X.dot(self.coefs_) + self.intercepts_)
+        return H.dot(self.beta_)
+
+    def predict(self, X):
+        return np.argmax(self.predict_proba(X), axis=1)
+            
+    def activation(self, x):
+        return 1. / (1. + np.exp(-x))

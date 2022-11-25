@@ -6,6 +6,8 @@ from detectors.meta import Meta
 from tqdm import tqdm
 import strlearn as sl
 import matplotlib.pyplot as plt
+
+from utils import ELMI
 real_streams = [
     'real_streams/covtypeNorm-1-2vsAll-pruned.arff',
     'real_streams/electricity.npy',
@@ -55,22 +57,22 @@ for f_id, f in enumerate(real_streams):
     _chunks = len(y_all)
     print(_chunks)
 
-    X_all = np.array(X_all)
-    y_all = np.array(y_all)
-    X_all = X_all.reshape(-1, X_all.shape[-1])
-    y_all = y_all.flatten()
-    print(X_all.shape)
-    print(y_all.shape)
+    # X_all = np.array(X_all)
+    # y_all = np.array(y_all)
+    # X_all = X_all.reshape(-1, X_all.shape[-1])
+    # y_all = y_all.flatten()
+    # print(X_all.shape)
+    # print(y_all.shape)
     
-    all = np.concatenate((X_all, y_all[:,None]), axis=1)
-    print(all.shape)
+    # all = np.concatenate((X_all, y_all[:,None]), axis=1)
+    # print(all.shape)
 
-    np.save('real_streams_pr/%s.npy' % fname, all)
+    # np.save('real_streams_pr/%s.npy' % fname, all)
     
     stream = sl.streams.NPYParser('real_streams_pr/%s.npy' % fname, chunk_size=stream_static['chunk_size'], n_chunks=_chunks)
     
     if f_id==0:
-        drfs=[57,121,131,155,260,295,300,320,330,350,375]
+        drfs=[57,121,131,155,205,260,295,350]
     if f_id==1:
         drfs=[20,38,55,115,145]
     if f_id==2:
@@ -78,21 +80,23 @@ for f_id, f in enumerate(real_streams):
     if f_id==3:
         drfs=[125]
     if f_id==4:
-        drfs=[9,60,70,90,190]
+        drfs=[9,60,90,125,190]
     if f_id==5:
-        drfs=[9,35,180,220]
+        drfs=[9,35,60,180,220]
         
-    clf = [GaussianNB(), MLPClassifier()]
+    # clf = [GaussianNB(), MLPClassifier()]
+    clf = [GaussianNB(), MLPClassifier(), ELMI(probing_rate=1., update_rate=1.)]
     
     evaluator = sl.evaluators.TestThenTrain()
     evaluator.process(stream, clf)
     
     fig, ax = plt.subplots(1,1,figsize=(10,5))
     
-    plt.plot(evaluator.scores[0,:,1])
-    plt.plot(evaluator.scores[1,:,1])
+    for i in range(len(clf)):
+        plt.plot(evaluator.scores[i,:,1], alpha=0.3, label=['gnb', 'mlp', 'elm9', 'elm1'][i])
     plt.vlines(drfs,0.5,1, color='r')
     # plt.xticks(np.linspace(0,250,30))
+    plt.legend()
     plt.grid()
     
     plt.tight_layout()

@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import utils
-from sklearn.neural_network import MLPClassifier
 from sklearn.decomposition import PCA
 
 measures = ["clustering",
@@ -23,6 +22,16 @@ real_streams = [
     'INSECTS-gradual',
     'INSECTS-incremental'
     ]
+
+real_streams_full = [
+    'real_streams/covtypeNorm-1-2vsAll-pruned.arff',
+    'real_streams/electricity.npy',
+    'real_streams/poker-lsn-1-2vsAll-pruned.arff',
+    'real_streams/INSECTS-abrupt_imbalanced_norm.arff',
+    'real_streams/INSECTS-gradual_imbalanced_norm.arff',
+    'real_streams/INSECTS-incremental_imbalanced_norm.arff'
+    ]
+
 limit=5
 
 for f_id in range(len(real_streams)):
@@ -32,13 +41,22 @@ for f_id in range(len(real_streams)):
             continue
         # print(f_id, m)
         # print(res.shape) # drfs, reps, chunks, measures + label
-        perm = np.random.permutation(res.shape[0])
-        res = res[perm]
         
         X = res[:,:-1]
-        y = res[:,-1]
-        # print(f_id, np.unique(y))
+        y=[]
         
+        concept=0
+        fname=(real_streams_full[f_id].split('/')[1]).split('.')[0]
+        drfs = np.load('real_streams_gt/%s.npy' % fname)
+        for i in range(X.shape[0]):
+            if i in drfs:
+                concept+=1
+            y.append(concept)
+            
+        perm = np.random.permutation(res.shape[0])
+        X = X[perm]
+        y = np.array(y)[perm]
+          
         #EH
         X[np.isnan(X)]=1
         X[np.isinf(X)]=1
