@@ -71,6 +71,6 @@ for m_id, m in enumerate(measures):
                     clf_res[m_id, d_id, r_id, fold, base_id] = acc
                     pbar.update(1)
                 
-            print(clf_res[m_id, d_id, r_id])
+            print(m, np.mean(clf_res[m_id, d_id, r_id], axis=0))
             
     np.save('res_clf_cls/clf.npy', clf_res)
