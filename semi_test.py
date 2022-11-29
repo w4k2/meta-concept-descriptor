@@ -1,5 +1,5 @@
 import numpy as np
-from SSG import SemiSyntheticStreamGenerator
+from vapor.SSG import SemiSyntheticStreamGenerator
 import matplotlib.pyplot as plt
 
 drift_type = {'interpolation':'cubic', 'n_drifts': 6}

@@ -1,5 +1,5 @@
 import numpy as np
-from SSG import SemiSyntheticStreamGenerator
+from vapor.SSG import SemiSyntheticStreamGenerator
 from pymfe.mfe import MFE
 from tqdm import tqdm
 
