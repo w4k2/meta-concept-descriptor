@@ -54,3 +54,4 @@ for dataset_id, dataset in enumerate(real_streams):
     
 plt.tight_layout()
 plt.savefig('foo.png')
+plt.savefig('fig_clf/real.png')

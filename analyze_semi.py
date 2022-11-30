@@ -60,3 +60,4 @@ for dataset_id, dataset in enumerate(static_data):
         
 plt.tight_layout()
 plt.savefig('foo.png')
+plt.savefig('fig_clf/semi.png')

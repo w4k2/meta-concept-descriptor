@@ -27,7 +27,7 @@ res_mean = np.mean(res, axis=(2,3))
 res_ext_mean = np.mean(res_ext, axis=(2,3))
 print(res_mean.shape)
 
-fig, ax = plt.subplots(2, 3, figsize=(13,12))
+fig, ax = plt.subplots(2, 3, figsize=(13,12), sharex=True, sharey=True)
 plt.suptitle('Synthetic', fontsize=18)
 
 for r_id, r in enumerate([res_mean, res_ext_mean]):
@@ -47,3 +47,4 @@ for r_id, r in enumerate([res_mean, res_ext_mean]):
         
 plt.tight_layout()
 plt.savefig('foo.png')
+plt.savefig('fig_clf/syn.png')
