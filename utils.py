@@ -28,6 +28,18 @@ measure_labels = [
     statistical
 ]
 
+measure_labels_selected = [
+    clustering,
+    complexity,
+    # concept,
+    # general,
+    info_theory,
+    # itemset,
+    landmarking,
+    # model_based,
+    statistical
+]
+
 from sklearn.base import BaseEstimator, ClassifierMixin
 
 class ELMI(BaseEstimator, ClassifierMixin):
