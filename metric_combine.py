@@ -34,9 +34,10 @@ all = []
 
 for m_id, m in enumerate(measures):
     res = np.load('res/%s.npy' % m)
-    for i in range(res.shape[-1]):
+    for i in range(res.shape[-1]-1):
         all.append(res[:,:,:,i])
-    
+
+all.append(res[:,:,:,res.shape[-1]-1])
 all = np.array(all)
 print(all.shape)
 np.save('res_clf_cls/combined_syn.npy', all)
@@ -47,9 +48,10 @@ all = []
 
 for m_id, m in enumerate(measures):
     res = np.load('res/semi_%s.npy' % m)
-    for i in range(res.shape[-1]):
+    for i in range(res.shape[-1]-1):
         all.append(res[:,:,0,:,i])
-    
+        
+all.append(res[:,:,0,:,res.shape[-1]-1])
 all = np.array(all)
 print(all.shape)
 np.save('res_clf_cls/combined_semi.npy', all)
@@ -60,8 +62,10 @@ for f_id in range(len(real_streams_full)):
     all = []
     for m_id, m in enumerate(measures):
         res = np.load('res/real_%s_%s.npy' % (f_id, m))
-        for i in range(res.shape[-1]):
+        for i in range(res.shape[-1]-1):
             all.append(res[:,i])
+            
+    all.append(res[:,res.shape[-1]-1])
     all = np.array(all)
     print(all.shape)
     np.save('res_clf_cls/combined_real_%i.npy' % f_id, all)
