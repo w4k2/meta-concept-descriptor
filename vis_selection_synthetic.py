@@ -1,7 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import utils
+from matplotlib.lines import Line2D
 
-np.random.seed(1233)
 
 base_clfs = ['GNB','KNN','SVM','DT','MLP']
 
@@ -20,6 +21,7 @@ anova = np.load('res_clf_cls/anova_sel.npy')
 print(clf.shape) # drfs, reps, features, folds, clfs
 print(anova.shape) # drfs, reps, features, (stat, val)
 
+# CLF
 fig, ax = plt.subplots(1,3,figsize=(10,15), sharex=True, sharey=True)
 
 for d_id, drift_type in enumerate(['Sudden', 'Gradual', 'Incremental']):    
@@ -40,3 +42,48 @@ for d_id, drift_type in enumerate(['Sudden', 'Gradual', 'Incremental']):
 plt.tight_layout()
 plt.savefig('foo.png')
     
+    
+plt.clf()
+
+# ANOVA
+
+
+anova_sum = np.nansum(anova[:,:,:,0], axis=(0,1))
+sort_order = np.flip(np.argsort(anova_sum))
+
+labels_measures = utils.measure_labels_selected
+labels_counts = [len(l) for l in labels_measures]
+labels_ids = [[c_id for _ in range(cnt)] for c_id,cnt in enumerate(labels_counts)]
+labels_ids = np.array(sum(labels_ids, []))[sort_order]
+
+labels_measures = np.array(sum(labels_measures, []))
+
+cols=np.array(['r','g','b','gold','purple'])
+
+
+fig, ax = plt.subplots(3,1,figsize=(15,10), sharex=True, sharey=True)
+
+for d_id, drift_type in enumerate(['Sudden', 'Gradual', 'Incremental']):    
+    ax[d_id].set_title(drift_type)    
+    for r_id in range(stream_reps):
+        temp = anova[d_id,r_id,:,0]
+        # mask = np.isnan(temp)==False
+        # l = labels_measures[mask]
+        # t = temp[mask]
+        l = labels_measures[sort_order]
+        t = temp[sort_order]
+        ax[d_id].bar(range(len(l)), t, alpha=0.2,color=cols[labels_ids])
+    ax[d_id].set_xticks(range(len(l)),l,rotation=90)
+    ax[d_id].grid()
+    ax[d_id].spines['top'].set_visible(False)
+    ax[d_id].spines['right'].set_visible(False)
+
+custom_lines = [Line2D([0], [0], color=cols[0], lw=4),
+                Line2D([0], [0], color=cols[1], lw=4),
+                Line2D([0], [0], color=cols[2], lw=4),
+                Line2D([0], [0], color=cols[3], lw=4),
+                Line2D([0], [0], color=cols[4], lw=4)]
+ax[0].legend(custom_lines, ['Clustering', 'Complexity', 'Info theory', 'Landmarking', 'Statistical'])
+        
+plt.tight_layout()
+plt.savefig('foo.png')
