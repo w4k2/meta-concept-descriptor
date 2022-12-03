@@ -35,7 +35,7 @@ origial_datasets=6
 n_splits=2
 n_repeats=5
 
-n_drift_types = 3
+n_drift_types = 2
 
 clf_res = np.zeros((len(measures), origial_datasets, n_drift_types, n_splits*n_repeats, len(base_clfs)))
 
