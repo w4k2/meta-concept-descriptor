@@ -94,7 +94,7 @@ print(reduced.shape) # 3, 5, 10, 5
 
 reduced_mean = np.mean(reduced, axis=(1,2))
 
-fig, ax = plt.subplots(3, 1, figsize=(8,8))
+fig, ax = plt.subplots(3, 1, figsize=(8,8), sharex=True, sharey=True)
     
 for drf_id, drift_type in enumerate(['Sudden', 'Gradual', 'Incremental']):    
     img = np.zeros((2,5))
@@ -114,3 +114,4 @@ for drf_id, drift_type in enumerate(['Sudden', 'Gradual', 'Incremental']):
 
 plt.tight_layout()
 plt.savefig('fig_clf/reduced_syn.png')
+plt.savefig('foo.png')
