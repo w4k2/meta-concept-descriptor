@@ -96,3 +96,31 @@ ax.legend(custom_lines, ['Clustering', 'Complexity', 'Info theory', 'Landmarking
         
 plt.tight_layout()
 plt.savefig('fig_clf/anova_real.png')
+
+# REDUCED
+
+fig, ax = plt.subplots(3, 2, figsize=(8,8), sharex=True, sharey=True)
+ax = ax.ravel()
+res = np.load('res_clf_cls/real_clf_reduced.npy')
+
+for f_id, f in enumerate(real_streams):
+    clf = np.load('res_clf_cls/clf_sel_real_%i.npy' % f_id)
+
+    img = np.zeros((2,5))
+    img[0] = np.mean(res[f_id], axis=0)
+    img[1] = np.mean(clf[-1], axis=0)
+    
+    ax[f_id].imshow(img, vmin=0.05, vmax=1)
+    ax[f_id].set_title(f)
+    
+    ax[f_id].set_xticks(range(len(base_clfs)), base_clfs)
+    ax[f_id].set_yticks(range(2), ['reduced', 'full'])
+    
+    for _a, __a in enumerate(['reduced', 'full']):
+        for _b, __b in enumerate(base_clfs):
+            ax[f_id].text(_b, _a, "%.3f" % (img[_a, _b]) , va='center', ha='center', c='white', fontsize=11)
+    
+
+plt.tight_layout()
+plt.savefig('fig_clf/reduced_real.png')
+plt.savefig('foo.png')

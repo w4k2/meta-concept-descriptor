@@ -123,5 +123,5 @@ for dataset_id, dataset in enumerate(static_data):
         
 
 plt.tight_layout()
-# plt.savefig('fig_clf/reduced_emi.png')
+plt.savefig('fig_clf/reduced_semi.png')
 plt.savefig('foo.png')
