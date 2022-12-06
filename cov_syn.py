@@ -25,15 +25,13 @@ for drift in range(3):
         c = np.cov(temp)
         covs[drift, rep] = c
 
-covs_mean = np.abs(np.mean(covs, axis=1))
+covs_mean = np.abs(np.mean(covs, axis=(0,1)))
 
-fig, ax = plt.subplots(1,3, figsize=(18,8), sharex=True, sharey=True)
+fig, ax = plt.subplots(1,1, figsize=(12,12), sharex=True, sharey=True)
 
-for drf_id, drf in enumerate(['Sudden', 'Gradual', 'Incremental']):
-    ax[drf_id].imshow(covs_mean[drf_id])
-    ax[drf_id].set_title(drf)
-    ax[drf_id].set_xticks(range(len(labels)), labels, rotation=90)
-    ax[drf_id].set_yticks(range(len(labels)), labels)
-    
+ax.imshow(covs_mean)
+ax.set_xticks(range(len(labels)), labels, rotation=90)
+ax.set_yticks(range(len(labels)), labels)
+
 plt.tight_layout()
 plt.savefig('foo.png')
