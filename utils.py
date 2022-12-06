@@ -40,6 +40,16 @@ measure_labels_selected = [
     statistical
 ]
 
+measure_labels_selected_flat = np.array(sum(measure_labels_selected, []))
+
+selected2_measure_names = ['mean.mean', 't_m.mean', 'med.mean', 'mean.sd', 'f1.mean', 'min.mean', 'max.mean',
+                           'j_ent.sd', 'j_ent.mean', 'cl_c.mean', 'int', 'nre', 'cl_ent', 'c1', 'cl_c.sd' ,'mi.sd']
+
+selected2_indexes = []
+for m_id, m in enumerate(measure_labels_selected_flat):
+    if m in selected2_measure_names:
+        selected2_indexes.append(m_id)
+
 from sklearn.base import BaseEstimator, ClassifierMixin
 
 class ELMI(BaseEstimator, ClassifierMixin):
