@@ -23,6 +23,7 @@ for drift in range(3):
         temp = X[:,drift,rep]
         print(temp.shape)
         c = np.abs(np.cov(temp))
+        print(c)
         covs[drift, rep] = c
 
 covs_mean = np.mean(covs, axis=(0,1))

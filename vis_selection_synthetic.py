@@ -86,3 +86,31 @@ ax[0].legend(custom_lines, ['Clustering', 'Complexity', 'Info theory', 'Landmark
         
 plt.tight_layout()
 plt.savefig('fig_clf/anova_syn.png')
+
+# REDUCED
+
+reduced = np.load('res_clf_cls/clf_reduced.npy')
+print(reduced.shape) # 3, 5, 10, 5
+
+reduced_mean = np.mean(reduced, axis=(1,2))
+
+fig, ax = plt.subplots(3, 1, figsize=(8,8))
+    
+for drf_id, drift_type in enumerate(['Sudden', 'Gradual', 'Incremental']):    
+    img = np.zeros((2,5))
+    img[0] = reduced_mean[drf_id]
+    img[1] = np.mean(clf[drf_id, :, -1,:,:], axis=(0,1))
+    
+    ax[drf_id].imshow(img, vmin=0.05, vmax=1)
+    ax[drf_id].set_title(drift_type)
+    
+    ax[drf_id].set_xticks(range(len(base_clfs)), base_clfs)
+    ax[drf_id].set_yticks(range(2), ['reduced', 'full'])
+    
+    for _a, __a in enumerate(['reduced', 'full']):
+        for _b, __b in enumerate(base_clfs):
+            ax[drf_id].text(_b, _a, "%.3f" % (img[_a, _b]) , va='center', ha='center', c='white', fontsize=11)
+    
+
+plt.tight_layout()
+plt.savefig('fig_clf/reduced_syn.png')
