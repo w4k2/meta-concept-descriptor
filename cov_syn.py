@@ -12,9 +12,9 @@ X = res[indexes]
 print(X.shape)
 
 # normalize
-for Xf in X:
-    Xf -= np.mean(Xf)    
-    Xf /= np.std(Xf) + 0.00001
+for i in range(16):
+    X[i] -= np.mean(X[i])    
+    X[i] /= np.std(X[i]) + 0.00001
     
 covs = np.zeros((3,5,16,16))
     
@@ -25,7 +25,7 @@ for drift in range(3):
         c = np.cov(temp)
         covs[drift, rep] = c
 
-covs_mean = np.mean(covs, axis=1)
+covs_mean = np.abs(np.mean(covs, axis=1))
 
 fig, ax = plt.subplots(1,3, figsize=(18,8), sharex=True, sharey=True)
 
