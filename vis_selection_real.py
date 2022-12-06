@@ -48,8 +48,7 @@ for dataset_id, dataset in enumerate(real_streams):
         
         
 plt.tight_layout()
-plt.savefig('foo.png')
-    
+plt.savefig('fig_clf/sel_real.png')    
 plt.clf()
 
 # ANOVA
@@ -96,4 +95,4 @@ custom_lines = [Line2D([0], [0], color=cols[0], lw=4),
 ax.legend(custom_lines, ['Clustering', 'Complexity', 'Info theory', 'Landmarking', 'Statistical'])
         
 plt.tight_layout()
-plt.savefig('foo.png')
+plt.savefig('fig_clf/anova_real.png')

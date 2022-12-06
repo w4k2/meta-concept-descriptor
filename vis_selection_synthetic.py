@@ -40,8 +40,7 @@ for d_id, drift_type in enumerate(['Sudden', 'Gradual', 'Incremental']):
         
         
 plt.tight_layout()
-plt.savefig('foo.png')
-    
+plt.savefig('fig_clf/sel_syn.png')    
     
 plt.clf()
 
@@ -86,4 +85,4 @@ custom_lines = [Line2D([0], [0], color=cols[0], lw=4),
 ax[0].legend(custom_lines, ['Clustering', 'Complexity', 'Info theory', 'Landmarking', 'Statistical'])
         
 plt.tight_layout()
-plt.savefig('foo.png')
+plt.savefig('fig_clf/anova_syn.png')
