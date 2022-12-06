@@ -22,10 +22,10 @@ for drift in range(3):
     for rep in range(5):
         temp = X[:,drift,rep]
         print(temp.shape)
-        c = np.cov(temp)
+        c = np.abs(np.cov(temp))
         covs[drift, rep] = c
 
-covs_mean = np.abs(np.mean(covs, axis=(0,1)))
+covs_mean = np.mean(covs, axis=(0,1))
 
 fig, ax = plt.subplots(1,1, figsize=(12,12), sharex=True, sharey=True)
 
