@@ -34,4 +34,4 @@ ax.set_xticks(range(len(labels)), labels, rotation=90)
 ax.set_yticks(range(len(labels)), labels)
 
 plt.tight_layout()
-plt.savefig('foo.png')
+plt.savefig('fig_clf/cov_syn.png')

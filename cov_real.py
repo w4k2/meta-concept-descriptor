@@ -38,4 +38,4 @@ for f_id, f in enumerate(real_streams):
     ax.set_yticks(range(len(labels)), labels)
                 
 plt.tight_layout()
-plt.savefig('foo.png')
+plt.savefig('fig_clf/cov_real.png')

@@ -46,4 +46,4 @@ for stream in range(6):
     ax.set_yticks(range(len(labels)), labels)
             
 plt.tight_layout()
-plt.savefig('foo.png')
+plt.savefig('fig_clf/cov_semi.png')
