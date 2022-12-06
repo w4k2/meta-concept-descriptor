@@ -62,4 +62,3 @@ for m_id, m in enumerate(measures):
                 plt.tight_layout()
                 plt.savefig('fig_semi/%s_%s_%s_%i.png' % (m, drf, static_data[dataset_id], r))
                 plt.savefig('foo.png')
-                
