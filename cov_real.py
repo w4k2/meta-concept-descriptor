@@ -35,13 +35,13 @@ for f_id, f in enumerate(real_streams):
         X_all[a] -= np.mean(X_all[a])
         X_all[a] /= np.std(X_all[a])
 
-        c = np.abs(np.cov(X_all))
+    c = np.abs(np.cov(X_all))
 
-        ax = axx[f_id,0]
-        ax.set_ylabel('%s' % (f))
-        ax.imshow(c)
-        ax.set_xticks(range(len(labels)), labels, rotation=90)
-        ax.set_yticks(range(len(labels)), labels)
+    ax = axx[f_id,0]
+    ax.set_ylabel('%s' % (f))
+    ax.imshow(c)
+    ax.set_xticks(range(len(labels)), labels, rotation=90)
+    ax.set_yticks(range(len(labels)), labels)
     
     # calculate for metachunk
     collected=[]
@@ -72,4 +72,5 @@ for f_id, f in enumerate(real_streams):
                 
 plt.tight_layout()
 plt.savefig('foo.png')
+plt.savefig('fig_clf/cov_real.png')
 # time.sleep(0.5)
