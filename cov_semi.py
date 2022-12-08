@@ -15,7 +15,8 @@ streams = ['australian',
 
 
 fig, axx = plt.subplots(6,2, figsize=(8,20), sharex=True, sharey=True)
-axx[0,0].set_title('MEAN')
+axx[0,0].set_title('MEAN ALL')
+axx[0,1].set_title('STD')
 
 res = np.load('res_clf_cls/combined_semi.npy')
 print(res.shape) # features+label, drifts, reps, chunks
