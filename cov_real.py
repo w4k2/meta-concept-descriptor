@@ -6,6 +6,7 @@ import time
 indexes = utils.selected2_indexes
 labels = utils.selected2_measure_names
 
+
 real_streams = [
     'covtypeNorm-1-2vsAll',
     'electricity',
@@ -15,16 +16,35 @@ real_streams = [
     'INSECTS-incremental'
     ]
 
-fig, axx = plt.subplots(2,3, figsize=(23,15), sharex=True, sharey=True)
-axx = axx.ravel()
+fig, axx = plt.subplots(6,2, figsize=(8,20), sharex=True, sharey=True)
+
+axx[0,0].set_title('ALL')
+axx[0,1].set_title('STD')
 
 for f_id, f in enumerate(real_streams):
+    
     res = np.load('res_clf_cls/combined_real_%i.npy' % f_id)
     print(res.shape) # features+label, drifts, reps, chunks
     
     X = res[indexes]
     print(X.shape)
     
+    # cov entire dataset
+    X_all = np.copy(X)
+    for a in range(len(labels)):
+        X_all[a] -= np.mean(X_all[a])
+        X_all[a] /= np.std(X_all[a])
+
+        c = np.abs(np.cov(X_all))
+
+        ax = axx[f_id,0]
+        ax.set_ylabel('%s' % (f))
+        ax.imshow(c)
+        ax.set_xticks(range(len(labels)), labels, rotation=90)
+        ax.set_yticks(range(len(labels)), labels)
+    
+    # calculate for metachunk
+    collected=[]
     window = 25
 
     for i in range(int(X.shape[-1]/window)):
@@ -33,7 +53,7 @@ for f_id, f in enumerate(real_streams):
         X_w = X[:,i*window:(i+1)*window]
         print(X_w.shape)
         
-        for a in range(16):
+        for a in range(len(labels)):
             m = np.mean(X_w[a])
             X_w[a] -= m
             s = np.std(X_w[a])
@@ -41,13 +61,15 @@ for f_id, f in enumerate(real_streams):
         
 
         c = np.abs(np.cov(X_w))
-
-        ax = axx[f_id]
-        ax.set_title('%s' % (f))
-        ax.imshow(c)
-        ax.set_xticks(range(len(labels)), labels, rotation=90)
-        ax.set_yticks(range(len(labels)), labels)
-                    
-        plt.tight_layout()
-        plt.savefig('foo.png')
-        time.sleep(0.5)
+        collected.append(c)
+    
+    std_collected = np.std(np.array(collected), axis=0)
+    # std_collected = np.mean(np.array(collected), axis=0)
+    ax = axx[f_id,1]
+    ax.imshow(std_collected)
+    ax.set_xticks(range(len(labels)), labels, rotation=90)
+    ax.set_yticks(range(len(labels)), labels)
+                
+plt.tight_layout()
+plt.savefig('foo.png')
+# time.sleep(0.5)

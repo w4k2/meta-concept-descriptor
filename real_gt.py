@@ -6,6 +6,7 @@ from detectors.meta import Meta
 from tqdm import tqdm
 import strlearn as sl
 import matplotlib.pyplot as plt
+from sklearn.tree import DecisionTreeClassifier
 
 from utils import ELMI
 real_streams = [
@@ -85,7 +86,8 @@ for f_id, f in enumerate(real_streams):
         drfs=[9,35,60,180,220]
         
     # clf = [GaussianNB(), MLPClassifier()]
-    clf = [GaussianNB(), MLPClassifier(), ELMI(probing_rate=1., update_rate=1.)]
+    # clf = [GaussianNB(), MLPClassifier(), ELMI(probing_rate=1., update_rate=1.)]
+    clf = [GaussianNB(), MLPClassifier(), DecisionTreeClassifier()]
     
     evaluator = sl.evaluators.TestThenTrain()
     evaluator.process(stream, clf)
@@ -103,5 +105,6 @@ for f_id, f in enumerate(real_streams):
     plt.savefig('real_streams_gt/%s.png' % fname)
     
     np.save('real_streams_gt/%s.npy' % fname, drfs)
+    np.save('real_streams_gt/clf_%s.npy' % fname, evaluator.scores)
     
     # exit()
