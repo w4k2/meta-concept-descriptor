@@ -21,7 +21,7 @@ for m_id, m in enumerate(measures):
     res = np.load('res/%s.npy' % m)
     print(res.shape) # drfs, reps, chunks, measures + label
     
-    for r in range(1):
+    for r in range(5):
     # for r in range(res.shape[1]):
         
         res_iter = res[:,r]
@@ -49,6 +49,10 @@ for m_id, m in enumerate(measures):
                     ax[i,j].set_yticks([])
                     ax[i,j].set_xticks([])
                     ax[i,j].scatter(X[:,i], X[:,j], c=y, linewidth=0, alpha=0.05, s=5, edgecolors=None, cmap='rainbow')
+                    ax[i,j].grid()
+                    ax[i,j].spines['top'].set_visible(False)
+                    ax[i,j].spines['right'].set_visible(False)
+
                     if j==0:
                         ax[i,j].set_ylabel(names[i])
                     if i==X.shape[1]-1:

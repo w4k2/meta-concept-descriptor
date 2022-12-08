@@ -20,11 +20,9 @@ n_drift_types=3
 stream_reps=5
 
 res = np.load('res_clf_cls/clf.npy') # measures, drifts, reps, folds, clfs
-# res_ext = np.load('res_clf_cls/clf_ext.npy') # measures, drifts, reps, folds, clfs
 print(res.shape)
 
 res_mean = np.mean(res, axis=(2,3))
-# res_ext_mean = np.mean(res_ext, axis=(2,3))
 print(res_mean.shape)
 
 fig, ax = plt.subplots(1, 3, figsize=(13,8), sharex=True, sharey=True)

@@ -80,6 +80,8 @@ for f_id in range(len(real_streams)):
                 ax[i,j].set_yticks([])
                 ax[i,j].set_xticks([])
                 ax[i,j].scatter(X[:,i], X[:,j], c=y, linewidth=0, alpha=0.2, s=20, edgecolors=None, cmap='rainbow')
+                ax[i,j].spines['top'].set_visible(False)
+                ax[i,j].spines['right'].set_visible(False)
                 if j==0:
                     ax[i,j].set_ylabel(names[i])
                 if i==X.shape[1]-1:
