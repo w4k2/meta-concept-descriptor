@@ -1,9 +1,11 @@
+"""
+Przygotowanie strumieni i meta - synthetic
+"""
+
 import numpy as np
 import strlearn as sl
 from pymfe.mfe import MFE
-import matplotlib.pyplot as plt
 from utils import find_real_drift
-import time
 from tqdm import tqdm
 
 replications = 5

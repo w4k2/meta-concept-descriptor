@@ -1,3 +1,7 @@
+"""
+E2 - klasyfikacja syntetycznych
+"""
+
 import numpy as np
 from sklearn import clone
 from sklearn.model_selection import RepeatedStratifiedKFold

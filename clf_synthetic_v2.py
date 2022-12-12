@@ -1,3 +1,7 @@
+"""
+E4 - klasyfikacja syntetycznych, ale tylko dla 17 wybranych metryk
+"""
+
 import numpy as np
 from sklearn import clone
 from sklearn.model_selection import RepeatedStratifiedKFold

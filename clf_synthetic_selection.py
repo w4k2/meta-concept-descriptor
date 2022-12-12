@@ -1,3 +1,7 @@
+"""
+E3, E4 - selekcja k-best + klasyfikacja + zapis f-test anova - syntetyczne
+"""
+
 import numpy as np
 from sklearn import clone
 from sklearn.model_selection import RepeatedStratifiedKFold

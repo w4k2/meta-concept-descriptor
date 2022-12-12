@@ -1,3 +1,7 @@
+"""
+E2 - klasyfikacja rzeczywistych
+"""
+
 import numpy as np
 from sklearn import clone
 from sklearn.model_selection import RepeatedStratifiedKFold

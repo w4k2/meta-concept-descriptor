@@ -1,3 +1,9 @@
+"""
+Plot.
+
+E3, E4 - selekcja k-best + ANOVA - semi
+"""
+
 import numpy as np
 import matplotlib.pyplot as plt
 import utils

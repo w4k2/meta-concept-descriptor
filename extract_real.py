@@ -1,3 +1,7 @@
+"""
+Przygotowanie strumieni i meta - rzeczywiste
+"""
+
 import numpy as np
 from pymfe.mfe import MFE
 from tqdm import tqdm

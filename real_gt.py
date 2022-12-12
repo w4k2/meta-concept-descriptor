@@ -1,8 +1,9 @@
+"""
+Oznaczanie momentów dryfu w rzeczywistych
+"""
 import numpy as np
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neural_network import MLPClassifier
-from detectors.ADWIN import ADWIN
-from detectors.meta import Meta
 from tqdm import tqdm
 import strlearn as sl
 import matplotlib.pyplot as plt

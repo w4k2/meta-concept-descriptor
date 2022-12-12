@@ -1,3 +1,7 @@
+"""
+Przygotowanie strumieni i meta - semi
+"""
+
 import numpy as np
 from vapor.SSG import SemiSyntheticStreamGenerator
 from pymfe.mfe import MFE

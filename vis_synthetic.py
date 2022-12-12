@@ -1,3 +1,7 @@
+"""
+E1 - scatterplot - syntetyczne
+"""
+
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.feature_selection import SelectKBest
