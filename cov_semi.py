@@ -43,7 +43,7 @@ for rep in range(6):
     covs = np.mean(np.array(covs),axis=0)
     ax = axx[rep,0]
     ax.set_ylabel('%s' % (streams[rep]))
-    ax.imshow(c)
+    ax.imshow(c, cmap='Blues')
     ax.set_xticks(range(len(labels)), labels, rotation=90)
     ax.set_yticks(range(len(labels)), labels)
 
@@ -77,7 +77,7 @@ for rep in range(6):
     collected = np.array(collected)
     collected_std = np.std(collected, axis=0)
     ax = axx[rep,1]
-    ax.imshow(collected_std)
+    ax.imshow(collected_std, cmap='Blues')
     ax.set_xticks(range(len(labels)), labels, rotation=90)
     ax.set_yticks(range(len(labels)), labels)
 

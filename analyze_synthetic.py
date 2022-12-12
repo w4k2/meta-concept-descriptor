@@ -30,11 +30,11 @@ plt.suptitle('Synthetic', fontsize=18)
 
 r = res_mean
 for drift_type_id, drift_type in enumerate(['Sudden', 'Gradual', 'Incremental']):
-    ax[drift_type_id].imshow(r[:,drift_type_id], vmin=0.05, vmax=1.)
+    ax[drift_type_id].imshow(r[:,drift_type_id], vmin=0.05, vmax=1., cmap='Blues')
     
     for _a, __a in enumerate(measures):
         for _b, __b in enumerate(base_clfs):
-            ax[drift_type_id].text(_b, _a, "%.3f" % (r[:,drift_type_id][_a, _b]) , va='center', ha='center', c='white', fontsize=11)
+            ax[drift_type_id].text(_b, _a, "%.3f" % (r[:,drift_type_id][_a, _b]) , va='center', ha='center', c='black' if r[:,drift_type_id][_a, _b]<0.5 else 'white', fontsize=11)
     
     ax[drift_type_id].set_xticks(np.arange(len(base_clfs)),base_clfs)
     ax[drift_type_id].set_yticks(np.arange(len(measures)),measures)

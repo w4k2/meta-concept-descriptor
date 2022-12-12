@@ -42,11 +42,11 @@ for dataset_id, dataset in enumerate(real_streams):
     axx = ax[dataset_id]
     
     r = res_mean[:,dataset_id]
-    axx.imshow(r, vmin=0.05, vmax=1.)
+    axx.imshow(r, vmin=0.05, vmax=1., cmap='Blues')
     
     for _a, __a in enumerate(measures):
         for _b, __b in enumerate(base_clfs):
-            axx.text(_b, _a, "%.3f" % (r[_a, _b]) , va='center', ha='center', c='white', fontsize=11)
+            axx.text(_b, _a, "%.3f" % (r[_a, _b]) , va='center', ha='center', c='black' if r[_a, _b]<0.5 else 'white', fontsize=11)
 
     axx.set_title(dataset)
     axx.set_xticks(np.arange(len(base_clfs)),base_clfs)

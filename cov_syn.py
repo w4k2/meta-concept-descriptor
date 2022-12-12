@@ -38,7 +38,7 @@ for drift in range(3):
     covs = np.mean(np.array(covs),axis=0)
     ax = axx[drift,0]
     ax.set_ylabel('%s' % (drifts[drift]))
-    ax.imshow(c)
+    ax.imshow(c, cmap='Blues')
     ax.set_xticks(range(len(labels)), labels, rotation=90)
     ax.set_yticks(range(len(labels)), labels)
 
@@ -72,7 +72,7 @@ for drift in range(3):
     collected = np.array(collected)
     collected_std = np.std(collected, axis=0)
     ax = axx[drift,1]
-    ax.imshow(collected_std)
+    ax.imshow(collected_std, cmap='Blues')
     ax.set_xticks(range(len(labels)), labels, rotation=90)
     ax.set_yticks(range(len(labels)), labels)
 

@@ -42,11 +42,11 @@ for dataset_id, dataset in enumerate(static_data):
         axx = ax[drift_type_id, dataset_id]
         
         r = res_mean[:,dataset_id,drift_type_id]
-        axx.imshow(r, vmin=0.05, vmax=1.)
+        axx.imshow(r, vmin=0.05, vmax=1., cmap='Blues')
         
         for _a, __a in enumerate(measures):
             for _b, __b in enumerate(base_clfs):
-                axx.text(_b, _a, "%.3f" % (r[_a, _b]) , va='center', ha='center', c='white', fontsize=11)
+                axx.text(_b, _a, "%.3f" % (r[_a, _b]) , va='center', ha='center', c='black' if r[_a, _b]<0.5 else 'white', fontsize=11)
         
         if drift_type_id==0:
             axx.set_title(dataset)
