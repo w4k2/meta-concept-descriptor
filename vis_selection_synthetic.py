@@ -22,22 +22,27 @@ print(clf.shape) # drfs, reps, features, folds, clfs
 print(anova.shape) # drfs, reps, features, (stat, val)
 
 # CLF
-fig, ax = plt.subplots(1,3,figsize=(10,15), sharex=True, sharey=True)
+fig, ax = plt.subplots(3,1,figsize=(10,7), sharex=True)
+c = plt.cm.turbo(np.linspace(0,1,6))
 
 for d_id, drift_type in enumerate(['Sudden', 'Gradual', 'Incremental']):    
     clf_temp = clf[d_id]
     clf_temp_mean = np.mean(clf[d_id], axis=(0,2))
     print(clf_temp_mean.shape)
     
-    ax[d_id].imshow(clf_temp_mean, vmin=0.05, vmax=1.)
+    for cm_id, cm in enumerate(clf_temp_mean.T):
+        ax[d_id].plot(cm, label=base_clfs[cm_id], c=c[cm_id])
     ax[d_id].set_title(drift_type)    
-    ax[d_id].set_xticks(np.arange(len(base_clfs)),base_clfs)
-    ax[d_id].set_yticks(np.arange(len(n_features)),n_features)
+    ax[d_id].set_xticks(np.arange(len(n_features)),n_features)
+    ax[d_id].spines['top'].set_visible(False)
+    ax[d_id].spines['right'].set_visible(False)
+    ax[d_id].grid(ls=':')
+    ax[d_id].set_ylabel('accuracy')
+    ax[d_id].set_xlabel('n features')
+
+    if d_id==0:
+        ax[d_id].legend()
     
-    for _a, __a in enumerate(n_features):
-        for _b, __b in enumerate(base_clfs):
-            ax[d_id].text(_b, _a, "%.3f" % (clf_temp_mean[_a, _b]) , va='center', ha='center', c='white', fontsize=11)
-        
         
 plt.tight_layout()
 plt.savefig('fig_clf/sel_syn.png')    
@@ -64,18 +69,19 @@ fig, ax = plt.subplots(3,1,figsize=(15,10), sharex=True, sharey=True)
 
 for d_id, drift_type in enumerate(['Sudden', 'Gradual', 'Incremental']):    
     ax[d_id].set_title(drift_type)    
+    start = np.zeros_like(anova[d_id,0,:,0])
     for r_id in range(stream_reps):
         temp = anova[d_id,r_id,:,0]
-        # mask = np.isnan(temp)==False
-        # l = labels_measures[mask]
-        # t = temp[mask]
         l = labels_measures[sort_order]
         t = temp[sort_order]
-        ax[d_id].bar(range(len(l)), t, alpha=0.2,color=cols[labels_ids])
+        ax[d_id].bar(range(len(l)), t, bottom=start, alpha=((1/(stream_reps+1))*(r_id+1)), color=cols[labels_ids])
+        t[np.isnan(t)] = 0
+        start+=t
     ax[d_id].set_xticks(range(len(l)),l,rotation=90)
-    ax[d_id].grid()
+    ax[d_id].grid(ls=":")
     ax[d_id].spines['top'].set_visible(False)
     ax[d_id].spines['right'].set_visible(False)
+    ax[d_id].set_xlim(-1,50-0.5)
 
 custom_lines = [Line2D([0], [0], color=cols[0], lw=4),
                 Line2D([0], [0], color=cols[1], lw=4),
@@ -98,20 +104,24 @@ fig, ax = plt.subplots(3, 1, figsize=(8,8), sharex=True, sharey=True)
     
 for drf_id, drift_type in enumerate(['Sudden', 'Gradual', 'Incremental']):    
     img = np.zeros((2,5))
-    img[0] = reduced_mean[drf_id]
-    img[1] = np.mean(clf[drf_id, :, -1,:,:], axis=(0,1))
+    full = np.mean(clf[drf_id, :, -1,:,:], axis=(0,1))
+    reduced = reduced_mean[drf_id]
+    img[0] = full
+    img[1] = full-reduced
     
-    ax[drf_id].imshow(img, vmin=0.05, vmax=1)
+    ax[drf_id].imshow(img, vmin=0.05, vmax=1, cmap='Blues')
     ax[drf_id].set_title(drift_type)
     
     ax[drf_id].set_xticks(range(len(base_clfs)), base_clfs)
-    ax[drf_id].set_yticks(range(2), ['reduced', 'full'])
+    ax[drf_id].set_yticks(range(2), ['full', 'reduced'])
     
-    for _a, __a in enumerate(['reduced', 'full']):
+    for _a, __a in enumerate(['full', 'reduced']):
         for _b, __b in enumerate(base_clfs):
-            ax[drf_id].text(_b, _a, "%.3f" % (img[_a, _b]) , va='center', ha='center', c='white', fontsize=11)
+            if _a==0:
+                ax[drf_id].text(_b, _a, "%.3f" % (img[_a, _b]) , va='center', ha='center', c='black' if img[_a, _b]<0.5 else 'white', fontsize=11)
+            else:
+                ax[drf_id].text(_b, _a, "%+.3f" % (img[_a, _b]) , va='center', ha='center', c='black' if img[_a, _b]<0.5 else 'white', fontsize=11)
     
-
 plt.tight_layout()
 plt.savefig('fig_clf/reduced_syn.png')
 plt.savefig('foo.png')
