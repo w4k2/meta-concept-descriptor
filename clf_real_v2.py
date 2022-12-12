@@ -7,7 +7,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.svm import SVC
 from tqdm import tqdm
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import balanced_accuracy_score
 import utils
 
 np.random.seed(1233)
@@ -75,7 +75,7 @@ for f_id in range(len(real_streams_full)):
             clf = clone(base_c)
             
             pred = clf.fit(X[train], y[train]).predict(X[test])
-            acc = accuracy_score(y[test], pred)
+            acc = balanced_accuracy_score(y[test], pred)
             
             clf_res[f_id, fold, base_id] = acc
             pbar.update(1)
