@@ -70,7 +70,8 @@ labels_ids = np.array(sum(labels_ids, []))[sort_order]
 
 labels_measures = np.array(sum(labels_measures, []))
 
-cols=np.array(['r','g','b','gold','purple'])
+# cols=np.array(['r','g','b','gold','purple'])
+cols=c
 
 
 fig, ax = plt.subplots(1,1,figsize=(12,8), sharex=True, sharey=True)
