@@ -24,7 +24,7 @@ stream_reps = 5
 clf = np.load('res_clf_cls/clf_sel.npy')
 anova = np.load('res_clf_cls/anova_sel.npy')
 
-print(clf.shape) # drfs, reps, features, folds, clfs
+print('A', clf.shape) # drfs, reps, features, folds, clfs
 print(anova.shape) # drfs, reps, features, (stat, val)
 
 # CLF
@@ -34,30 +34,36 @@ c = plt.cm.turbo(np.linspace(0,1,6))
 for d_id, drift_type in enumerate(['Sudden', 'Gradual', 'Incremental']):    
     clf_temp = clf[d_id]
     clf_temp_mean = np.mean(clf[d_id], axis=(0,2))
-    print(clf_temp_mean.shape)
+    
+    #print('A', clf.shape)
+    #exit()
     
     for cm_id, cm in enumerate(clf_temp_mean.T):
-        ax[d_id].plot(cm, label=base_clfs[cm_id], c=c[cm_id])
-    ax[d_id].set_title(drift_type)    
-    ax[d_id].set_xticks(np.arange(len(n_features)),n_features)
+        ax[d_id].plot(n_features, cm, label=base_clfs[cm_id], c=c[cm_id])
+    ax[d_id].set_title('%s drifts' % drift_type)    
+    ax[d_id].set_xticks(n_features)
     ax[d_id].spines['top'].set_visible(False)
     ax[d_id].spines['right'].set_visible(False)
     ax[d_id].grid(ls=':')
-    ax[d_id].set_ylabel('accuracy')
-    ax[d_id].set_xlabel('n features')
+    ax[d_id].set_ylabel('accuracy score')
+    ax[d_id].set_xlim(*n_features[::(len(n_features)-1)])
 
     if d_id==0:
-        ax[d_id].legend()
+        ax[d_id].legend(ncol=3, frameon=False)
     
+    if d_id == 2:
+        ax[d_id].set_xlabel('number of features')
         
 plt.tight_layout()
-plt.savefig('fig_clf/sel_syn.png')    
+plt.savefig('fig_clf/sel_syn.png')
+plt.savefig('fig_clf/sel_syn.eps')
+plt.savefig('foo.png')
     
 plt.clf()
 
+"""
 # ANOVA
-
-
+"""
 anova_sum = np.nansum(anova[:,:,:,0], axis=(0,1))
 sort_order = np.flip(np.argsort(anova_sum))
 
@@ -68,12 +74,12 @@ labels_ids = np.array(sum(labels_ids, []))[sort_order]
 
 labels_measures = np.array(sum(labels_measures, []))
 
-cols=c
+cols = c
 
-fig, ax = plt.subplots(3,1,figsize=(15,10), sharex=True, sharey=True)
+fig, ax = plt.subplots(3,1,figsize=(12,12/1.618), sharex=True, sharey=True)
 
 for d_id, drift_type in enumerate(['Sudden', 'Gradual', 'Incremental']):    
-    ax[d_id].set_title(drift_type)    
+    ax[d_id].set_title('%s drift' % drift_type)    
     start = np.zeros_like(anova[d_id,0,:,0])
     for r_id in range(stream_reps):
         temp = anova[d_id,r_id,:,0]
@@ -82,10 +88,11 @@ for d_id, drift_type in enumerate(['Sudden', 'Gradual', 'Incremental']):
         ax[d_id].bar(range(len(l)), t, bottom=start, alpha=((1/(stream_reps+1))*(r_id+1)), color=cols[labels_ids])
         t[np.isnan(t)] = 0
         start+=t
-    ax[d_id].set_xticks(range(len(l)),l,rotation=90)
+    ax[d_id].set_xticks(range(len(l)),l,rotation=45, ha='right', fontsize=8)
     ax[d_id].grid(ls=":")
     ax[d_id].spines['top'].set_visible(False)
     ax[d_id].spines['right'].set_visible(False)
+    ax[d_id].set_ylabel('accumulated F-statistic')
     ax[d_id].set_xlim(-1,50-0.5)
 
 custom_lines = [Line2D([0], [0], color=cols[0], lw=4),
@@ -93,13 +100,15 @@ custom_lines = [Line2D([0], [0], color=cols[0], lw=4),
                 Line2D([0], [0], color=cols[2], lw=4),
                 Line2D([0], [0], color=cols[3], lw=4),
                 Line2D([0], [0], color=cols[4], lw=4)]
-ax[0].legend(custom_lines, ['Clustering', 'Complexity', 'Info theory', 'Landmarking', 'Statistical'])
+ax[0].legend(custom_lines, ['Clustering', 'Complexity', 'Info theory', 'Landmarking', 'Statistical'], ncol=3, frameon=False)
         
 plt.tight_layout()
 plt.savefig('fig_clf/anova_syn.png')
+plt.savefig('bar.png')
 
+"""
 # REDUCED
-
+"""
 reduced = np.load('res_clf_cls/clf_reduced.npy')
 print(reduced.shape) # 3, 5, 10, 5
 
@@ -129,4 +138,4 @@ for drf_id, drift_type in enumerate(['Sudden', 'Gradual', 'Incremental']):
     
 plt.tight_layout()
 plt.savefig('fig_clf/reduced_syn.png')
-plt.savefig('foo.png')
+plt.savefig('baz.png')
