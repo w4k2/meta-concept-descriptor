@@ -120,7 +120,7 @@ for f_id, f in enumerate(real_streams):
     full = np.mean(res[f_id], axis=0)
     reduced = np.mean(clf[-1], axis=0)
     img[0] = full
-    img[1] = full-reduced
+    img[1] = reduced-full
     
     ax[f_id].imshow(img, vmin=0.05, vmax=1, cmap='Blues')
     ax[f_id].set_title(f)

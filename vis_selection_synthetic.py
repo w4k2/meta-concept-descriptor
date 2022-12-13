@@ -112,7 +112,7 @@ for drf_id, drift_type in enumerate(['Sudden', 'Gradual', 'Incremental']):
     full = np.mean(clf[drf_id, :, -1,:,:], axis=(0,1))
     reduced = reduced_mean[drf_id]
     img[0] = full
-    img[1] = full-reduced
+    img[1] = reduced-full
     
     ax[drf_id].imshow(img, vmin=0.05, vmax=1, cmap='Blues')
     ax[drf_id].set_title(drift_type)

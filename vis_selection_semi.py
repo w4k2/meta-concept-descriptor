@@ -128,7 +128,7 @@ for dataset_id, dataset in enumerate(static_data):
         full = np.mean(clf[dataset_id, drf_id, -1], axis=0)
         reduced = reduced_mean[dataset_id,drf_id]
         img[0] = full
-        img[1] = full-reduced
+        img[1] = reduced-full
         
         ax[dataset_id,drf_id].imshow(img, vmin=0.05, vmax=1, cmap='Blues')
         ax[dataset_id,drf_id].set_title('%s %s' % (dataset, drift_type))
