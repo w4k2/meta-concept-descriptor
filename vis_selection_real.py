@@ -117,8 +117,8 @@ for f_id, f in enumerate(real_streams):
     clf = np.load('res_clf_cls/clf_sel_real_%i.npy' % f_id)    
 
     img = np.zeros((2,5))
-    full = np.mean(res[f_id], axis=0)
-    reduced = np.mean(clf[-1], axis=0)
+    reduced = np.mean(res[f_id], axis=0)
+    full = np.mean(clf[-1], axis=0)
     img[0] = full
     img[1] = reduced-full
     
