@@ -1,3 +1,4 @@
+from matplotlib.lines import Line2D
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -83,6 +84,15 @@ for drf_id, drift_type in enumerate(['Sudden', 'Gradual', 'Incremental']):
 
 ax[0].set_xticks([0,1,2], ['Sudden', 'Gradual', 'Incremental'])
 
+
+legend_labels=[ '%s-%s' % (bc, d) for bc in base_clfs for d in ['F', 'R']]
+legend_colors=[]
+for i in range(len(c)):
+    legend_colors.append(c[i])
+    legend_colors.append(c2[i])
+custom_lines = [Line2D([0], [0], color=legend_colors[i], lw=4) for i in range(len(legend_colors))]
+ax[0].legend(custom_lines, legend_labels, ncol=5, frameon=False)
+
 # Semi
 reduced = np.load('res_clf_cls/semi_clf_reduced.npy')
 clf = np.load('res_clf_cls/clf_sel_semi.npy')
@@ -118,7 +128,7 @@ ax[3].set_xticks([0,1,2,3,4,5], real_streams)
 # Styling
 ax[0].set_title('Synthetic data streams')
 ax[1].set_title('Semi-synthetic data streams with nearest interpolation')
-ax[2].set_title('Semi-synthetic data streams with gradual interpolation')
+ax[2].set_title('Semi-synthetic data streams with cubic interpolation')
 ax[3].set_title('Real data streams')
 ax[0].set_xlim(ax[-1].get_xlim())
 
