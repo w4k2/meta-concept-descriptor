@@ -124,7 +124,7 @@ for drf_id, drift_type in enumerate(['Sudden', 'Gradual', 'Incremental']):
     img[1] = reduced-full
     
     ax[drf_id].imshow(img, vmin=0.05, vmax=1, cmap='Blues')
-    ax[drf_id].set_title(drift_type)
+    ax[drf_id].set_title('%s drift' % drift_type)
     
     ax[drf_id].set_xticks(range(len(base_clfs)), base_clfs)
     ax[drf_id].set_yticks(range(2), ['full', 'reduced'])

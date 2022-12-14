@@ -138,4 +138,4 @@ for f_id, f in enumerate(real_streams):
 
 plt.tight_layout()
 plt.savefig('fig_clf/reduced_real.png')
-plt.savefig('foo.png')
+plt.savefig('baz.png')
