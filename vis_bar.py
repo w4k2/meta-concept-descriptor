@@ -91,7 +91,7 @@ for i in range(len(c)):
     legend_colors.append(c[i])
     legend_colors.append(c2[i])
 custom_lines = [Line2D([0], [0], color=legend_colors[i], lw=4) for i in range(len(legend_colors))]
-ax[0].legend(custom_lines, legend_labels, ncol=5, frameon=False)
+ax[0].legend(custom_lines, legend_labels, ncol=5, frameon=False, loc=5, fontsize=11)
 
 # Semi
 reduced = np.load('res_clf_cls/semi_clf_reduced.npy')
