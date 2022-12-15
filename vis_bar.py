@@ -142,3 +142,5 @@ for aids, aa in enumerate(ax.ravel()):
 
 plt.tight_layout()
 plt.savefig('olaboga.png')
+plt.savefig('fig/reduced.png')
+plt.savefig('fig/reduced.eps')
