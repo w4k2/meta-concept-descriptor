@@ -36,8 +36,9 @@ print(clf.shape) # drfs, datasets, features, folds, clfs
 print(anova.shape) # drfs, datasets, features, (stat, val)
 
 # CLF
-fig, ax = plt.subplots(6,1,figsize=(10,15), sharex=True)
+fig, ax = plt.subplots(3,2,figsize=(10,7), sharex=True)
 c = plt.cm.turbo(np.linspace(0,1,6))
+ax=ax.ravel()
 
 for dataset_id, dataset in enumerate(static_data):
     axx = ax[dataset_id]
@@ -49,21 +50,31 @@ for dataset_id, dataset in enumerate(static_data):
     print(clf_temp_mean.shape)
     
     for cm_id, cm in enumerate(clf_temp_mean.T):
-        axx.plot(cm, label=base_clfs[cm_id], c=c[cm_id])
+        axx.plot(n_features, cm, label=base_clfs[cm_id], c=c[cm_id])
         
-    axx.set_title(dataset)
-    axx.set_xticks(np.arange(len(n_features)),n_features)
+    axx.set_title(dataset)  
+    axx.set_xticks(n_features, 
+                   [('%i' % s) if ss%2==0 else '' for ss, s in enumerate(n_features)])
     axx.spines['top'].set_visible(False)
     axx.spines['right'].set_visible(False)
     axx.grid(ls=':')
     axx.set_ylabel('accuracy')
-    axx.set_xlabel('n features')
+    axx.set_xlim(*n_features[::(len(n_features)-1)])
+    #axx.set_xlabel('n features')
 
+    #if dataset_id==0:
+    #    axx.legend()
+        
     if dataset_id==0:
-        axx.legend()
+        axx.legend(ncol=3, frameon=False, loc=1)
+    
+    if dataset_id == 5:
+        axx.set_xlabel('number of features')
 
 plt.tight_layout()
-plt.savefig('fig_clf/sel_semi.png')    
+plt.savefig('fig_clf/sel_semi.png')
+plt.savefig('fig_clf/sel_semi.eps')
+plt.savefig('foo.png')    
 plt.clf()
 
 # ANOVA
@@ -80,7 +91,7 @@ labels_measures = np.array(sum(labels_measures, []))
 
 cols=c
 
-fig, ax = plt.subplots(2,1,figsize=(12,8), sharex=True, sharey=True)
+fig, ax = plt.subplots(2,1,figsize=(12,12/1.618), sharex=True, sharey=True)
 
 for d_id, drift_type in enumerate(['Nearest', 'Cubic']):   
     start = np.zeros_like(anova[dataset_id,d_id,:,0])
@@ -93,27 +104,28 @@ for d_id, drift_type in enumerate(['Nearest', 'Cubic']):
         t[np.isnan(t)] = 0
         start+=t
     
-    ax[d_id].set_xticks(range(len(l)),l,rotation=90)
+    ax[d_id].set_xticks(range(len(l)),l,rotation=45, ha='right', fontsize=8)
     ax[d_id].grid(ls=":")
     ax[d_id].spines['top'].set_visible(False)
     ax[d_id].spines['right'].set_visible(False)
     ax[d_id].set_xlim(-1,50-0.5)
     ax[d_id].set_yscale('log')
+    ax[d_id].set_ylim(1, 1000000)
+    ax[d_id].set_ylabel('accumulated F-statistic (log scale)')
     
 custom_lines = [Line2D([0], [0], color=cols[0], lw=4),
                 Line2D([0], [0], color=cols[1], lw=4),
                 Line2D([0], [0], color=cols[2], lw=4),
                 Line2D([0], [0], color=cols[3], lw=4),
                 Line2D([0], [0], color=cols[4], lw=4)]
-ax[0].legend(custom_lines, ['Clustering', 'Complexity', 'Info theory', 'Landmarking', 'Statistical'])
+ax[0].legend(custom_lines, ['Clustering', 'Complexity', 'Info theory', 'Landmarking', 'Statistical'], ncol=3, frameon=False)
         
 plt.tight_layout()
 plt.savefig('fig_clf/anova_semi.png')
-
-
+plt.savefig('fig_clf/anova_semi.eps')
+plt.savefig('bar.png')
 
 # REDUCED
-
 reduced = np.load('res_clf_cls/semi_clf_reduced.npy')
 print(reduced.shape) # 6, 2, 10, 5
 # exit()

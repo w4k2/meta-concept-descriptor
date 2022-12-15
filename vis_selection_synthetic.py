@@ -104,6 +104,7 @@ ax[0].legend(custom_lines, ['Clustering', 'Complexity', 'Info theory', 'Landmark
         
 plt.tight_layout()
 plt.savefig('fig_clf/anova_syn.png')
+plt.savefig('fig_clf/anova_syn.eps')
 plt.savefig('bar.png')
 
 """

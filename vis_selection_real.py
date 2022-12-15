@@ -29,7 +29,7 @@ n_features = sqspace(1,118,31)[1:]
 
 
 # CLF
-fig, ax = plt.subplots(6,1,figsize=(10,12), sharex=True)
+fig, ax = plt.subplots(3,2,figsize=(10,7), sharex=True)
 c = plt.cm.turbo(np.linspace(0,1,6))
 ax = ax.ravel()
 
@@ -39,21 +39,25 @@ for dataset_id, dataset in enumerate(real_streams):
     clf_mean = np.mean(clf, axis=1)
     
     for cm_id, cm in enumerate(clf_mean.T):
-        ax[dataset_id].plot(cm, label=base_clfs[cm_id], c=c[cm_id])
+        ax[dataset_id].plot(n_features, cm, label=base_clfs[cm_id], c=c[cm_id])
     ax[dataset_id].set_title(dataset)    
     ax[dataset_id].set_xticks(np.arange(len(n_features)),n_features)
     ax[dataset_id].spines['top'].set_visible(False)
     ax[dataset_id].spines['right'].set_visible(False)
     ax[dataset_id].grid(ls=':')
-    ax[dataset_id].set_ylabel('BAC')
+    ax[dataset_id].set_ylabel('balanced accuracy score')
     ax[dataset_id].set_xlabel('n features')
+    
+    ax[dataset_id].set_xticks(n_features, 
+                [('%i' % s) if ss%2==0 else '' for ss, s in enumerate(n_features)])
 
-    if dataset_id==0:
-        ax[dataset_id].legend()
+    if dataset_id==3:
+        ax[dataset_id].legend(ncol=2, frameon=False)
 
         
 plt.tight_layout()
 plt.savefig('fig_clf/sel_real.png')    
+plt.savefig('fig_clf/sel_real.eps')    
 plt.clf()
 
 # ANOVA
@@ -80,7 +84,7 @@ labels_measures = np.array(sum(labels_measures, []))
 cols=c
 
 
-fig, ax = plt.subplots(1,1,figsize=(12,8), sharex=True, sharey=True)
+fig, ax = plt.subplots(1,1,figsize=(12,12/1.618), sharex=True, sharey=True)
 
 start = np.zeros_like(anovas[0])
 for dataset_id, dataset in enumerate(real_streams): 
@@ -91,7 +95,10 @@ for dataset_id, dataset in enumerate(real_streams):
     t[np.isnan(t)] = 0
     start+=t
     
-ax.set_xticks(range(len(l)),l,rotation=90)
+ax.set_title('Real data streams')
+ax.set_ylabel('accumulated F-statistic')
+    
+ax.set_xticks(range(len(l)),l,rotation=45, ha='right', fontsize=8)
 ax.grid(ls=":")
 ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
@@ -101,11 +108,12 @@ custom_lines = [Line2D([0], [0], color=cols[0], lw=4),
                 Line2D([0], [0], color=cols[2], lw=4),
                 Line2D([0], [0], color=cols[3], lw=4),
                 Line2D([0], [0], color=cols[4], lw=4)]
-ax.legend(custom_lines, ['Clustering', 'Complexity', 'Info theory', 'Landmarking', 'Statistical'])
+ax.legend(custom_lines, ['Clustering', 'Complexity', 'Info theory', 'Landmarking', 'Statistical'], ncol=3, frameon=False)
 ax.set_xlim(-1,50-0.5)
 
 plt.tight_layout()
 plt.savefig('fig_clf/anova_real.png')
+plt.savefig('fig_clf/anova_real.eps')
 
 # REDUCED
 
