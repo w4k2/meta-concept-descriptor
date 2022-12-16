@@ -58,7 +58,7 @@ for dataset_id, dataset in enumerate(static_data):
     axx.spines['top'].set_visible(False)
     axx.spines['right'].set_visible(False)
     axx.grid(ls=':')
-    axx.set_ylabel('accuracy')
+    axx.set_ylabel('blanced accuracy')
     axx.set_xlim(*n_features[::(len(n_features)-1)])
     #axx.set_xlabel('n features')
 

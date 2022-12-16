@@ -45,7 +45,7 @@ for d_id, drift_type in enumerate(['Sudden', 'Gradual', 'Incremental']):
     ax[d_id].spines['top'].set_visible(False)
     ax[d_id].spines['right'].set_visible(False)
     ax[d_id].grid(ls=':')
-    ax[d_id].set_ylabel('accuracy score')
+    ax[d_id].set_ylabel('balanced accuracy score')
     ax[d_id].set_xlim(*n_features[::(len(n_features)-1)])
 
     if d_id==0:

@@ -136,7 +136,7 @@ for aids, aa in enumerate(ax.ravel()):
     aa.set_ylim(0,1)
     aa.grid(axis='y', ls=':')
     
-    aa.set_ylabel('%saccuracy score' % ('balanced ' if aids == 3 else ''))
+    aa.set_ylabel('balanced accuracy score')
     aa.spines['top'].set_visible(False)
     aa.spines['right'].set_visible(False)
 
