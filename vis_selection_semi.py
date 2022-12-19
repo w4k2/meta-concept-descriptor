@@ -65,8 +65,8 @@ for dataset_id, dataset in enumerate(static_data):
     #if dataset_id==0:
     #    axx.legend()
         
-    if dataset_id==0:
-        axx.legend(ncol=3, frameon=False, loc=1)
+    if dataset_id==1:
+        axx.legend(ncol=3, frameon=False, loc=8)
     
     if dataset_id == 5:
         axx.set_xlabel('number of features')
