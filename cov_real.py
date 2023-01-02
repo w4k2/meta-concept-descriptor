@@ -43,7 +43,7 @@ for f_id, f in enumerate(real_streams):
 
     ax = axx[f_id,0]
     ax.set_ylabel('%s' % (f))
-    ax.imshow(c, cmap='Blues')
+    ax.imshow(c, cmap='Greys')
     ax.set_xticks(range(len(labels)), labels, rotation=90)
     ax.set_yticks(range(len(labels)), labels)
     
@@ -70,7 +70,9 @@ for f_id, f in enumerate(real_streams):
     std_collected = np.std(np.array(collected), axis=0)
     # std_collected = np.mean(np.array(collected), axis=0)
     ax = axx[f_id,1]
-    ax.imshow(std_collected, cmap='Blues')
+    ax.imshow(std_collected, cmap='Greys')
+    ax.set_xlim(std_collected.shape[0]-.5,-.5)
+
     ax.set_xticks(range(len(labels)), labels, rotation=90)
     ax.set_yticks(range(len(labels)), labels)
                 

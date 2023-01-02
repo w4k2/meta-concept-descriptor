@@ -84,7 +84,7 @@ labels_measures = np.array(sum(labels_measures, []))
 cols=c
 
 
-fig, ax = plt.subplots(1,1,figsize=(12,12/1.618), sharex=True, sharey=True)
+fig, ax = plt.subplots(1,1,figsize=(9,9/1.618), sharex=True, sharey=True)
 
 start = np.zeros_like(anovas[0])
 for dataset_id, dataset in enumerate(real_streams): 
