@@ -60,7 +60,7 @@ for m_id, m in enumerate(measures):
                                        X.shape[1],
                                        figsize=(6,6))
                 
-                plt.suptitle('%s %s %s rep:%i' % (m, drf, static_data[dataset_id], r))
+                plt.suptitle('%s %s %s' % (m, drf, static_data[dataset_id]))
                 
                 # Shuffle order and establish ranges for grid
                 shuffler = np.array(list(range(X.shape[0])))
@@ -179,5 +179,5 @@ for m_id, m in enumerate(measures):
                 plt.tight_layout()
                 plt.savefig('fig_semi/%s_%s_%s_%i.png' % (m, drf, static_data[dataset_id], r))
                 plt.savefig('fig_semi/%s_%s_%s_%i.eps' % (m, drf, static_data[dataset_id], r))
-                plt.savefig('foo.png')
+                plt.savefig('foo.png', dpi=200)
                 #exit()
