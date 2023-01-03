@@ -15,7 +15,7 @@
 # in the templates via {{ site.myvariable }}.
 title: Supplementary materials
 description: On metaattribute ability of implicit concept identification
-baseurl: "/" # the subpath of your site, e.g. /blog
+baseurl: "/meta-concept-descriptor/" # the subpath of your site, e.g. /blog
 
 permalink: pretty
 
