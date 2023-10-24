@@ -39,7 +39,7 @@ for f_id, f in enumerate(real_streams):
     c = np.abs(np.cov(X_all))
 
     ax = axx[0, f_id]
-    ax.set_ylabel('%s' % (f))
+    ax.set_title('%s' % (f))
     # print(np.nanmin(c), np.nanmax(c))
     im = ax.imshow(c, cmap='Greys', vmin=0, vmax=1)
     ax.set_xticks(range(len(labels)), labels, rotation=90)
