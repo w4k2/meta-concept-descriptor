@@ -1,6 +1,7 @@
 """
-Script for marking moments of drift for real-world datastreams.
+Script for detecting and marking moments of drift for real-world datastreams.
 """
+
 import numpy as np
 import strlearn as sl
 import matplotlib.pyplot as plt
@@ -22,10 +23,10 @@ stream_static = { 'chunk_size': 300 }
 pbar = tqdm(total=len(real_streams))
 
 for f_id, f in enumerate(real_streams):
+
     out = []
 
-    fname=(f.split('/')[1]).split('.')[0]
-
+    fname=(f.split('/')[2]).split('.')[0]
     if 'npy' in f:
         stream = sl.streams.NPYParser(f, chunk_size=stream_static['chunk_size'], n_chunks=100000)
     else:
@@ -67,6 +68,7 @@ for f_id, f in enumerate(real_streams):
 
     # np.save('real_streams_pr/%s.npy' % fname, all)
     
+    print(fname)
     stream = sl.streams.NPYParser('data/real_streams_pr/%s.npy' % fname, chunk_size=stream_static['chunk_size'], n_chunks=_chunks)
     
     if f_id==0:
@@ -87,22 +89,27 @@ for f_id, f in enumerate(real_streams):
     evaluator = sl.evaluators.TestThenTrain()
     evaluator.process(stream, clf)
     
-    fig, ax = plt.subplots(1,1,figsize=(10,5))
+    if f_id == 2:
+        fig, ax = plt.subplots(2,1,figsize=(13,7))
+    else:
+        fig, ax = plt.subplots(2,1,figsize=(7,7))
     
     for i in range(len(clf)):
-        ax.plot(evaluator.scores[i,:,1], alpha=0.9, label=['GNB', 'MLP'][i], c=['blue','tomato'][i], lw=1)
-    plt.xticks(drfs, rotation=90)
-    plt.legend(frameon=False)
-    plt.grid(ls=':')
-    ax.spines['top'].set_visible(False)
-    ax.spines['right'].set_visible(False)
-    ax.set_xlabel('chunk')
-    ax.set_ylabel('BAC')
+        ax[0].scatter(np.arange(len(evaluator.scores[i,:,1])),evaluator.scores[i,:,1], alpha=0.9, label=['GNB', 'MLP'][i], c=['blue','tomato'][i],s=3)
+        ax[1].plot(evaluator.scores[i,:,1], alpha=0.9, label=['GNB', 'MLP'][i], c=['blue','tomato'][i],lw=1)
+    for aa in ax:
+        aa.spines['top'].set_visible(False)
+        aa.spines['right'].set_visible(False)
+        aa.set_ylabel('BAC')
+        aa.legend(frameon=False)
+        aa.grid(ls=':')
+        aa.set_xticks(drfs, drfs, rotation=90)
     
+    ax[-1].set_xlabel('chunk')
+
     plt.tight_layout()
     plt.savefig('data/real_streams_gt/%s.png' % fname)
     
     np.save('data/real_streams_gt/%s.npy' % fname, drfs)
     np.save('data/real_streams_gt/clf_%s.npy' % fname, evaluator.scores)
     
-    # exit()

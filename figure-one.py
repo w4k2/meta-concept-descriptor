@@ -1,6 +1,6 @@
-'''
-Script generating sample figure for manuscript
-'''
+"""
+Script generating figure describing drift phases for manuscript
+"""
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -42,7 +42,6 @@ ax.set_yticks([0,.1,.25,.75,.9,1])
 ax.set_xticks(np.linspace(0,1,11))
 ax.plot(tpoints, scp, c='black')
 ax.fill_between(tpoints, scp, tpoints*0, color='#DDD')
-#ax.vlines(tpoints[ends], 0, 1, color='red')
 
 for tpe, sc in zip(tpoints[ends], scp[ends]):
     print(tpe, sc)
@@ -68,4 +67,4 @@ ax.spines['right'].set_visible(False)
 
 plt.tight_layout()
 plt.savefig('foo.png')
-plt.savefig('fig/figure1.eps')
+plt.savefig('figures/fig/figure1.eps')
