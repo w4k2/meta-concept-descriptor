@@ -18,9 +18,9 @@ print(X.shape)# f, drifts, reps, chunks
 
 drifts = ['Sudden', 'Gradual', 'Incremental']
 
-fig, axx = plt.subplots(3,2, figsize=(8,10), sharex=True, sharey=True)
-axx[0,0].set_title('MEAN ALL')
-axx[0,1].set_title('STD')
+fig, axx = plt.subplots(2,3, figsize=(11,7), sharex=True, sharey=True)
+axx[0,0].set_ylabel('MEAN ALL')
+axx[1,0].set_ylabel('STD')
 
 
 # cov entire dataset
@@ -40,12 +40,15 @@ for drift in range(3):
         covs.append(c)
     
     covs = np.mean(np.array(covs),axis=0)
-    ax = axx[drift,0]
-    ax.set_ylabel('%s' % (drifts[drift]))
-    ax.imshow(c, cmap='Greys')
+    ax = axx[0,drift]
+    ax.set_title('%s' % (drifts[drift]))
+    im = ax.imshow(c, cmap='Greys', vmin=0, vmax=1)
+    # print(np.nanmin(c), np.nanmax(c))
     ax.set_xticks(range(len(labels)), labels, rotation=90)
     ax.set_yticks(range(len(labels)), labels)
 
+cax_2 = axx[0,-1].inset_axes([1.04, 0.0, 0.05, 1.0])
+fig.colorbar(im, ax=axx[0,0], cax=cax_2)  
 
 # calculate for metachunk
  
@@ -75,12 +78,16 @@ for drift in range(3):
     
     collected = np.array(collected)
     collected_std = np.std(collected, axis=0)
-    ax = axx[drift,1]
-    ax.imshow(collected_std, cmap='Greys')
+    ax = axx[1,drift]
+    im = ax.imshow(collected_std, cmap='Greys', vmin=0, vmax=0.1)
     ax.set_xlim(collected_std.shape[0]-.5,-.5)
     ax.set_xticks(range(len(labels)), labels, rotation=90)
     ax.set_yticks(range(len(labels)), labels)
+    
+cax_2 = axx[1,-1].inset_axes([1.04, 0.0, 0.05, 1.0])
+fig.colorbar(im, ax=axx[0,0], cax=cax_2)  
 
 
 plt.tight_layout()
-plt.savefig('figures/cov_syn.png')
+plt.savefig('figures/fig_clf/cov_syn.png')
+plt.savefig('figures/fig_clf/cov_syn.eps')

@@ -19,9 +19,9 @@ streams = ['australian',
         ]
 
 
-fig, axx = plt.subplots(6,2, figsize=(8,20), sharex=True, sharey=True)
-axx[0,0].set_title('MEAN ALL')
-axx[0,1].set_title('STD')
+fig, axx = plt.subplots(2,6, figsize=(20,7.5), sharex=True, sharey=True)
+axx[0,0].set_ylabel('MEAN ALL')
+axx[1,0].set_ylabel('STD')
 
 res = np.load('results/combined_semi.npy')
 print(res.shape) # features+label, drifts, reps, chunks
@@ -46,11 +46,16 @@ for rep in range(6):
         covs.append(c)
     
     covs = np.mean(np.array(covs),axis=0)
-    ax = axx[rep,0]
-    ax.set_ylabel('%s' % (streams[rep]))
-    ax.imshow(c, cmap='Greys')
+    ax = axx[0,rep]
+    ax.set_title('%s' % (streams[rep]))
+    print(np.nanmin(c), np.nanmax(c))
+
+    im = ax.imshow(c, cmap='Greys', vmin=0, vmax=1)
     ax.set_xticks(range(len(labels)), labels, rotation=90)
     ax.set_yticks(range(len(labels)), labels)
+
+cax_2 = axx[0,-1].inset_axes([1.04, 0.0, 0.05, 1.0])
+fig.colorbar(im, ax=axx[0,0], cax=cax_2)  
 
 
 # calculate for metachunk
@@ -81,14 +86,17 @@ for rep in range(6):
     
     collected = np.array(collected)
     collected_std = np.std(collected, axis=0)
-    ax = axx[rep,1]
-    #ax.imshow(collected_std, cmap='Greys')
-    ax.imshow(collected_std, cmap='Greys')
+    ax = axx[1,rep]
+    # print(np.nanmin(collected_std), np.nanmax(collected_std))
+    im = ax.imshow(collected_std, cmap='Greys', vmin=0, vmax=0.2)
     ax.set_xlim(collected_std.shape[0]-.5,-.5)
     ax.set_xticks(range(len(labels)), labels, rotation=90)
     ax.set_yticks(range(len(labels)), labels)
 
+cax_2 = axx[1,-1].inset_axes([1.04, 0.0, 0.05, 1.0])
+fig.colorbar(im, ax=axx[0,0], cax=cax_2)  
 
 plt.tight_layout()
 plt.savefig('figures/fig_clf/cov_semi.png')
+plt.savefig('figures/fig_clf/cov_semi.eps')
 
