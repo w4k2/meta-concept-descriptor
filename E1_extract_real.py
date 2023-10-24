@@ -1,7 +1,6 @@
 """
 Experiment 1 -- collect streams and metafetaures -- real-world
 """
-
 import numpy as np
 from pymfe.mfe import MFE
 from tqdm import tqdm

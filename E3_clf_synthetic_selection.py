@@ -40,7 +40,7 @@ anova_res = np.full((n_drift_types, stream_reps, max(n_features), 2), np.nan).as
 
 pbar = tqdm(total=n_drift_types*len(n_features)*stream_reps*n_splits*n_repeats*len(base_clfs))
 
-res = np.load('res_clf_cls/combined_syn.npy')
+res = np.load('results/combined_syn.npy')
 print(res.shape) # drfs, reps, chunks, measures + label
 
 for d_id in range(n_drift_types):    
@@ -86,6 +86,6 @@ for d_id in range(n_drift_types):
             
         print(np.mean(clf_res[d_id, r_id], axis=1))
         
-np.save('res_clf_cls/clf_sel.npy', clf_res)
-np.save('res_clf_cls/anova_sel.npy', anova_res)
+np.save('results/clf_sel.npy', clf_res)
+np.save('results/anova_sel.npy', anova_res)
         

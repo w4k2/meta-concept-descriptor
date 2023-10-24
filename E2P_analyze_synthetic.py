@@ -22,7 +22,7 @@ base_clfs = ['GNB', 'KNN', 'SVM', 'DT', 'MLP']
 n_drift_types=3
 stream_reps=5
 
-res = np.load('res_clf_cls/clf.npy') # measures, drifts, reps, folds, clfs
+res = np.load('results/clf.npy') # measures, drifts, reps, folds, clfs
 print(res.shape)
 
 res_mean = np.mean(res, axis=(2,3))
@@ -45,4 +45,4 @@ for drift_type_id, drift_type in enumerate(['Sudden', 'Gradual', 'Incremental'])
         
 plt.tight_layout()
 plt.savefig('foo.png')
-plt.savefig('fig_clf/syn.png')
+plt.savefig('figures/fig_clf/syn.png')

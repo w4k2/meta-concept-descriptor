@@ -41,7 +41,7 @@ anova_res = np.zeros((origial_datasets, n_drift_types, max(n_features), 2))
 
 pbar = tqdm(total=origial_datasets*n_drift_types*len(n_features)*n_splits*n_repeats*len(base_clfs))
 
-res = np.load('res_clf_cls/combined_semi.npy')
+res = np.load('results/combined_semi.npy')
 print(res.shape) # features, datasets, drift types, chunks
 # exit()
 
@@ -89,6 +89,6 @@ for origin_id in range(origial_datasets):
             
         print(np.mean(clf_res[origin_id, d_id], axis=1))
         
-np.save('res_clf_cls/clf_sel_semi.npy', clf_res)
-np.save('res_clf_cls/anova_sel_semi.npy', anova_res)
+np.save('results/clf_sel_semi.npy', clf_res)
+np.save('results/anova_sel_semi.npy', anova_res)
         

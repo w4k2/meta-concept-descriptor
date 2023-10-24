@@ -1,7 +1,7 @@
 '''
 Script generating sample figure for manuscript
-
 '''
+
 import matplotlib.pyplot as plt
 import numpy as np
 from strlearn.streams import StreamGenerator

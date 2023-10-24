@@ -23,7 +23,7 @@ fig, axx = plt.subplots(6,2, figsize=(8,20), sharex=True, sharey=True)
 axx[0,0].set_title('MEAN ALL')
 axx[0,1].set_title('STD')
 
-res = np.load('res_clf_cls/combined_semi.npy')
+res = np.load('results/combined_semi.npy')
 print(res.shape) # features+label, drifts, reps, chunks
 
 X = res[indexes]
@@ -90,6 +90,5 @@ for rep in range(6):
 
 
 plt.tight_layout()
-plt.savefig('fig_clf/cov_semi.png')
-plt.savefig('foo.png')
-time.sleep(0.5)
+plt.savefig('figures/fig_clf/cov_semi.png')
+

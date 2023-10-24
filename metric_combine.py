@@ -1,5 +1,5 @@
 """
-Combina metagratures from promising froups
+Combine metafeatures from promising groups
 """
 import numpy as np
 

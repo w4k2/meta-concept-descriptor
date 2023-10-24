@@ -31,7 +31,7 @@ base_clfs = ['GNB', 'KNN', 'SVM', 'DT', 'MLP']
 n_drift_types=3
 stream_reps=5
 
-res = np.load('res_clf_cls/real_clf.npy') # measures, datasets, reps, folds, clfs
+res = np.load('results/real_clf.npy') # measures, datasets, reps, folds, clfs
 
 res_mean = np.mean(res, axis=2)
 print(res_mean.shape)
@@ -57,4 +57,4 @@ for dataset_id, dataset in enumerate(real_streams):
     
 plt.tight_layout()
 plt.savefig('foo.png')
-plt.savefig('fig_clf/real.png')
+plt.savefig('figures/fig_clf/real.png')

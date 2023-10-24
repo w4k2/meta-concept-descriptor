@@ -46,7 +46,7 @@ limit=5
 
 for f_id in range(len(real_streams)):
     for m_id, m in enumerate(measures):
-        res = np.load('res/real_%s_%s.npy' % (f_id, m))
+        res = np.load('results/real_%s_%s.npy' % (f_id, m))
         if res.shape[0]==0:
             continue
         # print(f_id, m)
@@ -193,8 +193,8 @@ for f_id in range(len(real_streams)):
         aa.set_title('t-SNE')
                                         
         plt.tight_layout()
-        plt.savefig('fig_rel/%s_%i.png' % (m, f_id))
-        plt.savefig('fig_rel/%s_%i.eps' % (m, f_id))
+        plt.savefig('figures/fig_rel/%s_%i.png' % (m, f_id))
+        plt.savefig('figures/fig_rel/%s_%i.eps' % (m, f_id))
         plt.savefig('foo.png')
         #exit()
         

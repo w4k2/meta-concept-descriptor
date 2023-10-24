@@ -35,7 +35,7 @@ ax = ax.ravel()
 
 for dataset_id, dataset in enumerate(real_streams):
     
-    clf = np.load('res_clf_cls/clf_sel_real_%i.npy' % dataset_id)
+    clf = np.load('results/clf_sel_real_%i.npy' % dataset_id)
     clf_mean = np.mean(clf, axis=1)
     
     for cm_id, cm in enumerate(clf_mean.T):
@@ -56,8 +56,8 @@ for dataset_id, dataset in enumerate(real_streams):
 
         
 plt.tight_layout()
-plt.savefig('fig_clf/sel_real.png')    
-plt.savefig('fig_clf/sel_real.eps')    
+plt.savefig('figures/fig_clf/sel_real.png')    
+plt.savefig('figures/fig_clf/sel_real.eps')    
 plt.clf()
 
 # ANOVA
@@ -65,7 +65,7 @@ plt.clf()
 anovas = []
 for dataset_id, dataset in enumerate(real_streams):
     
-    anova = np.load('res_clf_cls/anova_sel_real_%i.npy' % dataset_id)
+    anova = np.load('results/anova_sel_real_%i.npy' % dataset_id)
     anovas.append(anova[:,0])
 
 
@@ -112,17 +112,17 @@ ax.legend(custom_lines, ['Clustering', 'Complexity', 'Info theory', 'Landmarking
 ax.set_xlim(-1,50-0.5)
 
 plt.tight_layout()
-plt.savefig('fig_clf/anova_real.png')
-plt.savefig('fig_clf/anova_real.eps')
+plt.savefig('figures/fig_clf/anova_real.png')
+plt.savefig('figures/fig_clf/anova_real.eps')
 
 # REDUCED
 
 fig, ax = plt.subplots(3, 2, figsize=(8,8), sharex=True, sharey=True)
 ax = ax.ravel()
-res = np.load('res_clf_cls/real_clf_reduced.npy')
+res = np.load('results/real_clf_reduced.npy')
 
 for f_id, f in enumerate(real_streams):
-    clf = np.load('res_clf_cls/clf_sel_real_%i.npy' % f_id)    
+    clf = np.load('results/clf_sel_real_%i.npy' % f_id)    
 
     img = np.zeros((2,5))
     reduced = np.mean(res[f_id], axis=0)
@@ -145,5 +145,5 @@ for f_id, f in enumerate(real_streams):
     
 
 plt.tight_layout()
-plt.savefig('fig_clf/reduced_real.png')
+plt.savefig('figures/fig_clf/reduced_real.png')
 plt.savefig('baz.png')

@@ -21,8 +21,8 @@ n_features = sqspace(1,118,31)[1:]
 n_drift_types = 3
 stream_reps = 5
 
-clf = np.load('res_clf_cls/clf_sel.npy')
-anova = np.load('res_clf_cls/anova_sel.npy')
+clf = np.load('results/clf_sel.npy')
+anova = np.load('results/anova_sel.npy')
 
 print('A', clf.shape) # drfs, reps, features, folds, clfs
 print(anova.shape) # drfs, reps, features, (stat, val)
@@ -52,8 +52,8 @@ for d_id, drift_type in enumerate(['Sudden', 'Gradual', 'Incremental']):
         ax[d_id].set_xlabel('number of features')
         
 plt.tight_layout()
-plt.savefig('fig_clf/sel_syn.png')
-plt.savefig('fig_clf/sel_syn.eps')
+plt.savefig('figures/fig_clf/sel_syn.png')
+plt.savefig('figures/fig_clf/sel_syn.eps')
 plt.savefig('foo.png')
     
 plt.clf()
@@ -100,14 +100,14 @@ custom_lines = [Line2D([0], [0], color=cols[0], lw=4),
 ax[0].legend(custom_lines, ['Clustering', 'Complexity', 'Info theory', 'Landmarking', 'Statistical'], ncol=3, frameon=False)
         
 plt.tight_layout()
-plt.savefig('fig_clf/anova_syn.png')
-plt.savefig('fig_clf/anova_syn.eps')
+plt.savefig('figures/fig_clf/anova_syn.png')
+plt.savefig('figures/fig_clf/anova_syn.eps')
 plt.savefig('bar.png')
 
 """
 # REDUCED
 """
-reduced = np.load('res_clf_cls/clf_reduced.npy')
+reduced = np.load('results/clf_reduced.npy')
 print(reduced.shape) # 3, 5, 10, 5
 
 reduced_mean = np.mean(reduced, axis=(1,2))
@@ -135,5 +135,5 @@ for drf_id, drift_type in enumerate(['Sudden', 'Gradual', 'Incremental']):
                 ax[drf_id].text(_b, _a, "%+.3f" % (img[_a, _b]) , va='center', ha='center', c='black' if img[_a, _b]<0.5 else 'white', fontsize=11)
     
 plt.tight_layout()
-plt.savefig('fig_clf/reduced_syn.png')
+plt.savefig('figures/fig_clf/reduced_syn.png')
 plt.savefig('baz.png')

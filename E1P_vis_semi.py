@@ -33,7 +33,7 @@ static_data = ['australian',
 limit=5
 
 for m_id, m in enumerate(measures):
-    res = np.load('res/semi_%s.npy' % m)
+    res = np.load('results/semi_%s.npy' % m)
     print(res.shape) # datasets, drifts, reps, chunks, measures + label
     for dataset_id, dataset in enumerate(static_data):
         for r in range(1):
@@ -177,7 +177,7 @@ for m_id, m in enumerate(measures):
                 aa.set_title('t-SNE')
                                     
                 plt.tight_layout()
-                plt.savefig('fig_semi/%s_%s_%s_%i.png' % (m, drf, static_data[dataset_id], r))
-                plt.savefig('fig_semi/%s_%s_%s_%i.eps' % (m, drf, static_data[dataset_id], r))
+                plt.savefig('figures/fig_semi/%s_%s_%s_%i.png' % (m, drf, static_data[dataset_id], r))
+                plt.savefig('figures/fig_semi/%s_%s_%s_%i.eps' % (m, drf, static_data[dataset_id], r))
                 plt.savefig('foo.png', dpi=200)
                 #exit()

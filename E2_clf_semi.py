@@ -46,7 +46,7 @@ clf_res = np.zeros((len(measures), origial_datasets, n_drift_types, n_splits*n_r
 pbar = tqdm(total=len(measures)*origial_datasets*n_drift_types*n_splits*n_repeats*len(base_clfs))
 
 for m_id, m in enumerate(measures):
-    res = np.load('res/semi_%s.npy' % m)
+    res = np.load('results/semi_%s.npy' % m)
     res = res.reshape(6,2,5000,-1)
     # print(res.shape) # drfs, reps, chunks, measures + label
 
@@ -78,4 +78,4 @@ for m_id, m in enumerate(measures):
                 
             print(m, np.mean(clf_res[m_id, origin_id, d_id], axis=0))
         
-np.save('res_clf_cls/semi_clf.npy', clf_res)
+np.save('results/semi_clf.npy', clf_res)

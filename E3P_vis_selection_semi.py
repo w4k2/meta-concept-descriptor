@@ -29,8 +29,8 @@ n_features = sqspace(1,118,31)[1:]
 n_drift_types = 3
 stream_reps = 5
 
-clf = np.load('res_clf_cls/clf_sel_semi.npy')
-anova = np.load('res_clf_cls/anova_sel_semi.npy')
+clf = np.load('results/clf_sel_semi.npy')
+anova = np.load('results/anova_sel_semi.npy')
 
 print(clf.shape) # drfs, datasets, features, folds, clfs
 print(anova.shape) # drfs, datasets, features, (stat, val)
@@ -72,8 +72,8 @@ for dataset_id, dataset in enumerate(static_data):
         axx.set_xlabel('number of features')
 
 plt.tight_layout()
-plt.savefig('fig_clf/sel_semi.png')
-plt.savefig('fig_clf/sel_semi.eps')
+plt.savefig('figures/fig_clf/sel_semi.png')
+plt.savefig('figures/fig_clf/sel_semi.eps')
 plt.savefig('foo.png')    
 plt.clf()
 
@@ -121,12 +121,12 @@ custom_lines = [Line2D([0], [0], color=cols[0], lw=4),
 ax[0].legend(custom_lines, ['Clustering', 'Complexity', 'Info theory', 'Landmarking', 'Statistical'], ncol=3, frameon=False)
         
 plt.tight_layout()
-plt.savefig('fig_clf/anova_semi.png')
-plt.savefig('fig_clf/anova_semi.eps')
+plt.savefig('figures/fig_clf/anova_semi.png')
+plt.savefig('figures/fig_clf/anova_semi.eps')
 plt.savefig('bar.png')
 
 # REDUCED
-reduced = np.load('res_clf_cls/semi_clf_reduced.npy')
+reduced = np.load('results/semi_clf_reduced.npy')
 print(reduced.shape) # 6, 2, 10, 5
 # exit()
 
@@ -156,5 +156,5 @@ for dataset_id, dataset in enumerate(static_data):
                     ax[dataset_id,drf_id].text(_b, _a, "%+.3f" % (img[_a, _b]) , va='center', ha='center', c='black' if img[_a, _b]<0.5 else 'white', fontsize=11)
     
 plt.tight_layout()
-plt.savefig('fig_clf/reduced_semi.png')
+plt.savefig('figures/fig_clf/reduced_semi.png')
 plt.savefig('baz.png')

@@ -27,7 +27,7 @@ axx[0,1].set_title('STD')
 
 for f_id, f in enumerate(real_streams):
     
-    res = np.load('res_clf_cls/combined_real_%i.npy' % f_id)
+    res = np.load('results/combined_real_%i.npy' % f_id)
     print(res.shape) # features+label, drifts, reps, chunks
     
     X = res[indexes]
@@ -77,6 +77,4 @@ for f_id, f in enumerate(real_streams):
     ax.set_yticks(range(len(labels)), labels)
                 
 plt.tight_layout()
-plt.savefig('foo.png')
-plt.savefig('fig_clf/cov_real.png')
-# time.sleep(0.5)
+plt.savefig('figures/fig_clf/cov_real.png')

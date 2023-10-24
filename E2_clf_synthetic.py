@@ -45,7 +45,7 @@ clf_res = np.zeros((len(measures), n_drift_types, stream_reps, n_splits*n_repeat
 pbar = tqdm(total=len(measures)*n_drift_types*stream_reps*n_splits*n_repeats*len(base_clfs))
 
 for m_id, m in enumerate(measures):
-    res = np.load('res/%s.npy' % m)
+    res = np.load('results/%s.npy' % m)
     # print(res.shape) # drfs, reps, chunks, measures + label
 
     for d_id, res_drift in enumerate(res):
@@ -77,4 +77,4 @@ for m_id, m in enumerate(measures):
                 
             print(m, np.mean(clf_res[m_id, d_id, r_id], axis=0))
             
-    np.save('res_clf_cls/clf.npy', clf_res)
+    np.save('results/clf.npy', clf_res)

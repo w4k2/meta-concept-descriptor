@@ -2,20 +2,19 @@
 Script for marking moments of drift for real-world datastreams.
 """
 import numpy as np
+import strlearn as sl
+import matplotlib.pyplot as plt
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neural_network import MLPClassifier
 from tqdm import tqdm
-import strlearn as sl
-import matplotlib.pyplot as plt
-from sklearn.svm import SVC
 
 real_streams = [
-    'real_streams/covtypeNorm-1-2vsAll-pruned.arff',
-    'real_streams/electricity.npy',
-    'real_streams/poker-lsn-1-2vsAll-pruned.arff',
-    'real_streams/INSECTS-abrupt_imbalanced_norm.arff',
-    'real_streams/INSECTS-gradual_imbalanced_norm.arff',
-    'real_streams/INSECTS-incremental_imbalanced_norm.arff'
+    'data/real_streams/covtypeNorm-1-2vsAll-pruned.arff',
+    'data/real_streams/electricity.npy',
+    'data/real_streams/poker-lsn-1-2vsAll-pruned.arff',
+    'data/real_streams/INSECTS-abrupt_imbalanced_norm.arff',
+    'data/real_streams/INSECTS-gradual_imbalanced_norm.arff',
+    'data/real_streams/INSECTS-incremental_imbalanced_norm.arff'
     ]
 
 stream_static = { 'chunk_size': 300 }
@@ -68,7 +67,7 @@ for f_id, f in enumerate(real_streams):
 
     # np.save('real_streams_pr/%s.npy' % fname, all)
     
-    stream = sl.streams.NPYParser('real_streams_pr/%s.npy' % fname, chunk_size=stream_static['chunk_size'], n_chunks=_chunks)
+    stream = sl.streams.NPYParser('data/real_streams_pr/%s.npy' % fname, chunk_size=stream_static['chunk_size'], n_chunks=_chunks)
     
     if f_id==0:
         drfs=[57,121,131,155,205,260,295,350]
@@ -101,9 +100,9 @@ for f_id, f in enumerate(real_streams):
     ax.set_ylabel('BAC')
     
     plt.tight_layout()
-    plt.savefig('real_streams_gt/%s.png' % fname)
+    plt.savefig('data/real_streams_gt/%s.png' % fname)
     
-    np.save('real_streams_gt/%s.npy' % fname, drfs)
-    np.save('real_streams_gt/clf_%s.npy' % fname, evaluator.scores)
+    np.save('data/real_streams_gt/%s.npy' % fname, drfs)
+    np.save('data/real_streams_gt/clf_%s.npy' % fname, evaluator.scores)
     
     # exit()

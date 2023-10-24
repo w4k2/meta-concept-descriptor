@@ -15,12 +15,12 @@ drift_types = {
     'cubic': {'interpolation':'cubic', 'n_drifts': 6},
 }
 
-static_data = ['static_data/australian.csv',
-               'static_data/banknote.csv',
-               'static_data/diabetes.csv',
-               'static_data/german.csv',
-               'static_data/vowel0.csv',
-               'static_data/wisconsin.csv'
+static_data = ['data/static_data/australian.csv',
+               'data/static_data/banknote.csv',
+               'data/static_data/diabetes.csv',
+               'data/static_data/german.csv',
+               'data/static_data/vowel0.csv',
+               'data/static_data/wisconsin.csv'
                ]
 
 stream_static = {
@@ -137,4 +137,4 @@ for m_id, measure_key in enumerate(measures):
                     out[dataset_id, dt_id, rep, chunk, -1] = concept
                     pbar.update(1)
                     
-        np.save('res/semi_%s.npy' % measure_key, out)
+        np.save('results/semi_%s.npy' % measure_key, out)

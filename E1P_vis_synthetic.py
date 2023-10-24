@@ -27,7 +27,7 @@ measures = ["clustering",
 limit=5
 
 for m_id, m in enumerate(measures):
-    res = np.load('res/%s.npy' % m)
+    res = np.load('results/%s.npy' % m)
     print(res.shape) # drfs, reps, chunks, measures + label
     
     for r in range(5):
@@ -167,8 +167,8 @@ for m_id, m in enumerate(measures):
             aa.set_title('t-SNE')
                                     
             plt.tight_layout()
-            plt.savefig('fig_syn/%s_%s_%i.png' % (m, drf, r), dpi=200)
-            plt.savefig('fig_syn/%s_%s_%i.eps' % (m, drf, r), dpi=200)
+            plt.savefig('figures/fig_syn/%s_%s_%i.png' % (m, drf, r), dpi=200)
+            plt.savefig('figures/fig_syn/%s_%s_%i.eps' % (m, drf, r), dpi=200)
             plt.savefig('foo.png', dpi=200)
             plt.close()
             

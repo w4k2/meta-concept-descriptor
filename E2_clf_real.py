@@ -53,7 +53,7 @@ pbar = tqdm(total=len(measures)*origial_datasets*n_splits*n_repeats*len(base_clf
 
 for f_id in range(len(real_streams_full)):
     for m_id, m in enumerate(measures):
-        res = np.load('res/real_%s_%s.npy' % (f_id, m))
+        res = np.load('results/real_%s_%s.npy' % (f_id, m))
         
         p = np.random.permutation(res.shape[0])
         res = res[p]
@@ -79,4 +79,4 @@ for f_id in range(len(real_streams_full)):
             
         print(m, np.mean(clf_res[m_id, f_id], axis=0))
     
-np.save('res_clf_cls/real_clf.npy', clf_res)
+np.save('results/real_clf.npy', clf_res)

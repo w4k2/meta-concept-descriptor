@@ -34,7 +34,7 @@ clf_res = np.zeros((origial_datasets, n_drift_types, n_splits*n_repeats, len(bas
 
 pbar = tqdm(total=origial_datasets*n_drift_types*n_splits*n_repeats*len(base_clfs))
 
-res = np.load('res_clf_cls/combined_semi.npy')
+res = np.load('results/combined_semi.npy')
 print(res.shape) # features+label, drifts, reps, chunks
 
 indexes = utils.selected2_indexes
@@ -71,4 +71,4 @@ for d_id in range(n_drift_types):
             
         print(np.mean(clf_res[o_id, d_id], axis=0))
     
-np.save('res_clf_cls/semi_clf_reduced.npy', clf_res)
+np.save('results/semi_clf_reduced.npy', clf_res)

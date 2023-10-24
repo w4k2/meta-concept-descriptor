@@ -27,12 +27,12 @@ measures = ["clustering",
         ]
 
 real_streams_full = [
-    'real_streams/covtypeNorm-1-2vsAll-pruned.arff',
-    'real_streams/electricity.npy',
-    'real_streams/poker-lsn-1-2vsAll-pruned.arff',
-    'real_streams/INSECTS-abrupt_imbalanced_norm.arff',
-    'real_streams/INSECTS-gradual_imbalanced_norm.arff',
-    'real_streams/INSECTS-incremental_imbalanced_norm.arff'
+    'data/real_streams/covtypeNorm-1-2vsAll-pruned.arff',
+    'data/real_streams/electricity.npy',
+    'data/real_streams/poker-lsn-1-2vsAll-pruned.arff',
+    'data/real_streams/INSECTS-abrupt_imbalanced_norm.arff',
+    'data/real_streams/INSECTS-gradual_imbalanced_norm.arff',
+    'data/real_streams/INSECTS-incremental_imbalanced_norm.arff'
     ]
 
 base_clfs = [
@@ -56,7 +56,7 @@ indexes.append(-1) #keep label
 labels = utils.selected2_measure_names
 
 for f_id in range(len(real_streams_full)):
-    res = np.load('res_clf_cls/combined_real_%i.npy' % f_id)
+    res = np.load('results/combined_real_%i.npy' % f_id)
 
     res = res[indexes]
     res = res.swapaxes(0,1)
@@ -85,4 +85,4 @@ for f_id in range(len(real_streams_full)):
         
     print(np.mean(clf_res[f_id], axis=0))
     
-np.save('res_clf_cls/real_clf_reduced.npy', clf_res)
+np.save('results/real_clf_reduced.npy', clf_res)

@@ -22,12 +22,12 @@ base_clfs = [
     MLPClassifier(random_state=11313)
 ]
 real_streams_full = [
-    'real_streams/covtypeNorm-1-2vsAll-pruned.arff',
-    'real_streams/electricity.npy',
-    'real_streams/poker-lsn-1-2vsAll-pruned.arff',
-    'real_streams/INSECTS-abrupt_imbalanced_norm.arff',
-    'real_streams/INSECTS-gradual_imbalanced_norm.arff',
-    'real_streams/INSECTS-incremental_imbalanced_norm.arff'
+    'data/real_streams/covtypeNorm-1-2vsAll-pruned.arff',
+    'data/real_streams/electricity.npy',
+    'data/real_streams/poker-lsn-1-2vsAll-pruned.arff',
+    'data/real_streams/INSECTS-abrupt_imbalanced_norm.arff',
+    'data/real_streams/INSECTS-gradual_imbalanced_norm.arff',
+    'data/real_streams/INSECTS-incremental_imbalanced_norm.arff'
     ]
 
 def sqspace(start, end, num):
@@ -47,7 +47,7 @@ for f_id in range(len(real_streams_full)):
 
     pbar = tqdm(total=len(n_features)*n_splits*n_repeats*len(base_clfs))
 
-    res_temp = np.load('res_clf_cls/combined_real_%i.npy' % f_id)
+    res_temp = np.load('results/combined_real_%i.npy' % f_id)
     print(res_temp.shape) # features, chunks
     
     res_temp = res_temp.swapaxes(0,1)
@@ -88,6 +88,6 @@ for f_id in range(len(real_streams_full)):
                 # print(acc)
                 pbar.update(1)
                
-    np.save('res_clf_cls/clf_sel_real_%i.npy' % f_id, clf_res)
-    np.save('res_clf_cls/anova_sel_real_%i.npy' % f_id, anova_res)
+    np.save('results/clf_sel_real_%i.npy' % f_id, clf_res)
+    np.save('results/anova_sel_real_%i.npy' % f_id, anova_res)
     

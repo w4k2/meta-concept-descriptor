@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 indexes = utils.selected2_indexes
 labels = utils.selected2_measure_names
 
-res = np.load('res_clf_cls/combined_syn.npy')
+res = np.load('results/combined_syn.npy')
 print(res.shape) # features+label, drifts, reps, chunks
 
 X = res[indexes]
@@ -83,5 +83,4 @@ for drift in range(3):
 
 
 plt.tight_layout()
-plt.savefig('fig_clf/cov_syn.png')
-plt.savefig('foo.png')
+plt.savefig('figures/cov_syn.png')

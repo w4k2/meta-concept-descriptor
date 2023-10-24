@@ -37,7 +37,7 @@ indexes = utils.selected2_indexes
 indexes.append(-1) #keep label
 labels = utils.selected2_measure_names
 
-res = np.load('res_clf_cls/combined_syn.npy')
+res = np.load('results/combined_syn.npy')
 print(res.shape) # features+label, drifts, reps, chunks
 
 res = res[indexes]
@@ -73,4 +73,4 @@ for d_id in range(n_drift_types):
             
         print(np.mean(clf_res[d_id, r_id], axis=0))
         
-np.save('res_clf_cls/clf_reduced.npy', clf_res)
+np.save('results/clf_reduced.npy', clf_res)

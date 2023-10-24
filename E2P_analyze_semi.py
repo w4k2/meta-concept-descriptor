@@ -30,7 +30,7 @@ base_clfs = ['GNB', 'KNN', 'SVM', 'DT', 'MLP']
 n_drift_types=3
 stream_reps=5
 
-res = np.load('res_clf_cls/semi_clf.npy') # measures, datasets, drifts, reps, folds, clfs
+res = np.load('results/semi_clf.npy') # measures, datasets, drifts, reps, folds, clfs
 res = res[:,:,:2]
 
 res_mean = np.mean(res, axis=(2,3))
@@ -59,4 +59,4 @@ for dataset_id, dataset in enumerate(static_data):
         
 plt.tight_layout()
 plt.savefig('foo.png')
-plt.savefig('fig_clf/semi.png')
+plt.savefig('figures/fig_clf/semi.png')
