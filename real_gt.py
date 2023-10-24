@@ -1,5 +1,5 @@
 """
-Oznaczanie momentów dryfu w rzeczywistych
+Script for marking moments of drift for real-world datastreams.
 """
 import numpy as np
 from sklearn.naive_bayes import GaussianNB
@@ -7,9 +7,8 @@ from sklearn.neural_network import MLPClassifier
 from tqdm import tqdm
 import strlearn as sl
 import matplotlib.pyplot as plt
-from sklearn.tree import DecisionTreeClassifier
+from sklearn.svm import SVC
 
-from utils import ELMI
 real_streams = [
     'real_streams/covtypeNorm-1-2vsAll-pruned.arff',
     'real_streams/electricity.npy',
@@ -21,9 +20,7 @@ real_streams = [
 
 stream_static = { 'chunk_size': 300 }
 
-
 pbar = tqdm(total=len(real_streams))
-
 
 for f_id, f in enumerate(real_streams):
     out = []
@@ -86,9 +83,7 @@ for f_id, f in enumerate(real_streams):
     if f_id==5:
         drfs=[9,35,60,180,220]
         
-    # clf = [GaussianNB(), MLPClassifier()]
-    # clf = [GaussianNB(), MLPClassifier(), ELMI(probing_rate=1., update_rate=1.)]
-    clf = [GaussianNB(), MLPClassifier(), DecisionTreeClassifier()]
+    clf = [GaussianNB(), MLPClassifier()]
     
     evaluator = sl.evaluators.TestThenTrain()
     evaluator.process(stream, clf)
@@ -96,11 +91,14 @@ for f_id, f in enumerate(real_streams):
     fig, ax = plt.subplots(1,1,figsize=(10,5))
     
     for i in range(len(clf)):
-        plt.plot(evaluator.scores[i,:,1], alpha=0.3, label=['gnb', 'mlp', 'elm9', 'elm1'][i])
-    plt.vlines(drfs,0.5,1, color='r')
-    # plt.xticks(np.linspace(0,250,30))
-    plt.legend()
-    plt.grid()
+        ax.plot(evaluator.scores[i,:,1], alpha=0.9, label=['GNB', 'MLP'][i], c=['blue','tomato'][i], lw=1)
+    plt.xticks(drfs, rotation=90)
+    plt.legend(frameon=False)
+    plt.grid(ls=':')
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.set_xlabel('chunk')
+    ax.set_ylabel('BAC')
     
     plt.tight_layout()
     plt.savefig('real_streams_gt/%s.png' % fname)

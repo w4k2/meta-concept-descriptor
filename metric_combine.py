@@ -1,5 +1,5 @@
 """
-Sklejenie meta z obiecujących podgrup
+Combina metagratures from promising froups
 """
 import numpy as np
 

@@ -1,5 +1,5 @@
 """
-Przygotowanie strumieni i meta - synthetic
+Experiment 1 -- collect streams and metafetaures -- synthetic
 """
 
 import numpy as np

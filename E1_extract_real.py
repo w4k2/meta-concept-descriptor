@@ -1,5 +1,5 @@
 """
-Przygotowanie strumieni i meta - rzeczywiste
+Experiment 1 -- collect streams and metafetaures -- real-world
 """
 
 import numpy as np
@@ -38,7 +38,7 @@ for m_id, measure_key in enumerate(measures):
         fname=(f.split('/')[1]).split('.')[0]
 
         drfs = np.load('real_streams_gt/%s.npy' % fname)
-        
+       
         concept=0
         out = []
         
@@ -48,7 +48,6 @@ for m_id, measure_key in enumerate(measures):
             # GET CONCEPT
             if chunk in drfs:
                 concept+=1
-                # print(concept)
                            
             # CALCULATE
             try:
@@ -58,9 +57,7 @@ for m_id, measure_key in enumerate(measures):
                 break
                     
             if len(np.unique(y))<2:
-                # print('skip', chunk)
                 continue
-                # exit()
                                 
             mfe = MFE(groups=[measure_key])
             mfe.fit(X,y)
@@ -68,7 +65,5 @@ for m_id, measure_key in enumerate(measures):
             ft.append(concept)
 
             out.append(ft)
-        # print(np.array(out).shape)
-        # exit()
                 
         np.save('res/real_%i_%s.npy' % (f_id, measure_key), np.array(out))

@@ -34,10 +34,7 @@ c = plt.cm.turbo(np.linspace(0,1,6))
 for d_id, drift_type in enumerate(['Sudden', 'Gradual', 'Incremental']):    
     clf_temp = clf[d_id]
     clf_temp_mean = np.mean(clf[d_id], axis=(0,2))
-    
-    #print('A', clf.shape)
-    #exit()
-    
+        
     for cm_id, cm in enumerate(clf_temp_mean.T):
         ax[d_id].plot(n_features, cm, label=base_clfs[cm_id], c=c[cm_id])
     ax[d_id].set_title('%s drifts' % drift_type)    
