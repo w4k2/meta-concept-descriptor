@@ -2,6 +2,7 @@
 layout: page
 title:  "Drift Annotation procedure"
 has_children: true
+nav_order: 10
 ---
 
 ## Drift annotation procedure
@@ -17,19 +18,19 @@ It should be emphasized that the processed streams were previously divided into 
 Below we present the classification results using scetterplot (top row) and plot (bottom row) for the processed streams. The quality obtained by GNB is marked in blue, the MLP is marked in gold, and in red - ELM. The x-axis shows the identified moments of drift, determined based on changes in classification quality.
 
 ### Electricity
-![electricity](data/real_streams_gt/electricity.png)
+![electricity](/meta-concept-descriptor/fig_stream/electricity.png)
 
 ### Covtype
-![covtype](data/real_streams_gt/covtypeNorm-1-2vsAll-pruned.png)
+![covtype](/meta-concept-descriptor/fig_stream/covtypeNorm-1-2vsAll-pruned.png)
 
 ### Poker
-![poker](data/real_streams_gt/poker-lsn-1-2vsAll-pruned.png)
+![poker](/meta-concept-descriptor/fig_stream/poker-lsn-1-2vsAll-pruned.png)
 
 ### Insect abrupt
-![insect-abrupt](data/real_streams_gt/INSECTS-abrupt_imbalanced_norm.png)
+![insect-abrupt](/meta-concept-descriptor/fig_stream/INSECTS-abrupt_imbalanced_norm.png)
 
 ### Insect gradual
-![insect-grad](data/real_streams_gt/INSECTS-gradual_imbalanced_norm.png)
+![insect-grad](/meta-concept-descriptor/fig_stream/INSECTS-gradual_imbalanced_norm.png)
 
 ### Insect incremental
-![insect-abrupt](data/real_streams_gt/INSECTS-incremental_imbalanced_norm.png)
+![insect-abrupt](/meta-concept-descriptor/fig_stream/INSECTS-incremental_imbalanced_norm.png)

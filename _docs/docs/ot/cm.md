@@ -22,6 +22,7 @@ The description is based on the docummentation of [pymfe](https://pymfe.readthed
 | VDU | Dunn Index — The lowest intercluster distance divided by the highest intracluster distance. |
             
 ### Complexity
+
 | Metafeature name / name abbreviation | Description |
 | --- | --- |
 | C1 | Entropy of Class Proportions. |    

@@ -220,30 +220,105 @@
 </table></div>
 
 <h3 id="complexity">Complexity</h3>
-<p>| Metafeature name / name abbreviation | Description |
-| — | — |
-| C1 | Entropy of Class Proportions. |  <br />
-| C2 | Imbalance Ratio |  <br />
-| Cls_coef | Generates an epsilon-Nearest Neighbours graph. The edges are selected based on the Gower distance between samples, normalized to the range between 0 and 1. Edges between instances of distinct classes are removed. The neighborhood of each vertex is calculated – the instances directly connected to it. Then, the number of edges between the sample’s neighbors is calculated and divided by the maximum possible number of edges between them. The final measure is calculated based on the neighborhood of each point.|  <br />
-| Density | Generates an epsilon-Nearest Neighbours graph as decribed in Cls_coef. The measure calculates the number of edges in the final graph divided by the total possible number of edges.|  <br />
-| F1 | Maximum Fisher’s discriminant ratio. |  <br />
-| F1v | Directional vector maximum Fisher’s discriminant ratio. |  <br />
-| F2 | Volume of overlapping region. |  <br />
-| F3 | Maximum individual feature efficiency. |  <br />
-| F4 | Collective feature efficiency. |  <br />
-| Hubs | Generates an epsilon-Nearest Neighbours graph as decribed in Cls_coef. The measure scores each sample by the number of connections to neighbors, weighted by the number of connections the neighbors have. |  <br />
-| L1 | Sum of the error distance by linear programming. |  <br />
-| L2 | Error rate of linear classifier. |  <br />
-| L3 | Non linearity of linear classifier. |  <br />
-| LSC | Local set average cardinality. |  <br />
-| N1 | Fraction of borderline points. |
-| N2 | Ratio of intra/extra class NN distance. |  <br />
-| N3 | Error rate of NN classifier. |  <br />
-| N4 | Nonlinearity of NN classifier. |  <br />
-| T1 | Fraction of hyperspheres covering data. |      <br />
-| T2 | Number of features per dimension. |      <br />
-| T3 | Number of PCA dimensions per points. |      <br />
-| T4 | Ration of the PCA dimension to the original dimension. |</p>
+
+<div class="table-wrapper"><table>
+  <thead>
+    <tr>
+      <th>Metafeature name / name abbreviation</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>C1</td>
+      <td>Entropy of Class Proportions.</td>
+    </tr>
+    <tr>
+      <td>C2</td>
+      <td>Imbalance Ratio</td>
+    </tr>
+    <tr>
+      <td>Cls_coef</td>
+      <td>Generates an epsilon-Nearest Neighbours graph. The edges are selected based on the Gower distance between samples, normalized to the range between 0 and 1. Edges between instances of distinct classes are removed. The neighborhood of each vertex is calculated – the instances directly connected to it. Then, the number of edges between the sample’s neighbors is calculated and divided by the maximum possible number of edges between them. The final measure is calculated based on the neighborhood of each point.</td>
+    </tr>
+    <tr>
+      <td>Density</td>
+      <td>Generates an epsilon-Nearest Neighbours graph as decribed in Cls_coef. The measure calculates the number of edges in the final graph divided by the total possible number of edges.</td>
+    </tr>
+    <tr>
+      <td>F1</td>
+      <td>Maximum Fisher’s discriminant ratio.</td>
+    </tr>
+    <tr>
+      <td>F1v</td>
+      <td>Directional vector maximum Fisher’s discriminant ratio.</td>
+    </tr>
+    <tr>
+      <td>F2</td>
+      <td>Volume of overlapping region.</td>
+    </tr>
+    <tr>
+      <td>F3</td>
+      <td>Maximum individual feature efficiency.</td>
+    </tr>
+    <tr>
+      <td>F4</td>
+      <td>Collective feature efficiency.</td>
+    </tr>
+    <tr>
+      <td>Hubs</td>
+      <td>Generates an epsilon-Nearest Neighbours graph as decribed in Cls_coef. The measure scores each sample by the number of connections to neighbors, weighted by the number of connections the neighbors have.</td>
+    </tr>
+    <tr>
+      <td>L1</td>
+      <td>Sum of the error distance by linear programming.</td>
+    </tr>
+    <tr>
+      <td>L2</td>
+      <td>Error rate of linear classifier.</td>
+    </tr>
+    <tr>
+      <td>L3</td>
+      <td>Non linearity of linear classifier.</td>
+    </tr>
+    <tr>
+      <td>LSC</td>
+      <td>Local set average cardinality.</td>
+    </tr>
+    <tr>
+      <td>N1</td>
+      <td>Fraction of borderline points.</td>
+    </tr>
+    <tr>
+      <td>N2</td>
+      <td>Ratio of intra/extra class NN distance.</td>
+    </tr>
+    <tr>
+      <td>N3</td>
+      <td>Error rate of NN classifier.</td>
+    </tr>
+    <tr>
+      <td>N4</td>
+      <td>Nonlinearity of NN classifier.</td>
+    </tr>
+    <tr>
+      <td>T1</td>
+      <td>Fraction of hyperspheres covering data.</td>
+    </tr>
+    <tr>
+      <td>T2</td>
+      <td>Number of features per dimension.</td>
+    </tr>
+    <tr>
+      <td>T3</td>
+      <td>Number of PCA dimensions per points.</td>
+    </tr>
+    <tr>
+      <td>T4</td>
+      <td>Ration of the PCA dimension to the original dimension.</td>
+    </tr>
+  </tbody>
+</table></div>
 
 <h3 id="concept">Concept</h3>
 
