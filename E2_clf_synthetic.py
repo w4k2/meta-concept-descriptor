@@ -1,5 +1,5 @@
 """
-E2 - klasyfikacja syntetycznych
+E2 - classification for synthetic streams
 """
 
 import numpy as np
@@ -46,11 +46,8 @@ pbar = tqdm(total=len(measures)*n_drift_types*stream_reps*n_splits*n_repeats*len
 
 for m_id, m in enumerate(measures):
     res = np.load('results/%s.npy' % m)
-    # print(res.shape) # drfs, reps, chunks, measures + label
 
     for d_id, res_drift in enumerate(res):
-        # print(res_drift.shape) # reps, chunks, measures + label
-        
         for r_id, res_rep in enumerate(res_drift):
             #shuffle
             p = np.random.permutation(res_rep.shape[0])

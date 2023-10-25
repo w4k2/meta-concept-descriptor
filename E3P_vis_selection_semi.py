@@ -1,7 +1,7 @@
 """
 Plot.
 
-E3, E4 - selekcja k-best + ANOVA - semi
+E3, E4 - Visualize -- select k-best + classification + f-test anova --- Semi-synthetic streams
 """
 
 import numpy as np

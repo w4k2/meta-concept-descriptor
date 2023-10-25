@@ -1,7 +1,5 @@
 """
-Obliczenia + Plot.
-
-E5 - real
+E5 - experiment and presentation -- real-world streams
 """
 import utils 
 import numpy as np

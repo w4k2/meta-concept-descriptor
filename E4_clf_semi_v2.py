@@ -1,5 +1,5 @@
 """
-E4 - klasyfikacja semi, ale tylko dla 17 wybranych metryk
+E4 - classification with reduced number of measures -- semi-synthetic streams
 """
 import numpy as np
 from sklearn import clone

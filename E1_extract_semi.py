@@ -1,5 +1,5 @@
 """
-Experiment 1 -- collect streams and metafetaures -- semi-synthetic
+Experiment 1 -- collect streams and metafetaures -- semi-synthetic streams
 """
 
 import numpy as np

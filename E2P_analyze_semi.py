@@ -1,5 +1,5 @@
 """
-Plot E2 - semi
+Plot E2 - Visualize classification results for semi-synthetic streams
 """
 import numpy as np
 import matplotlib.pyplot as plt

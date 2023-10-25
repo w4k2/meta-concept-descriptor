@@ -1,12 +1,9 @@
 """
-Obliczenia + Plot.
-
-E5 - semi
+E5 - experiment and presentation -- semi-synthetic streams
 """
 import utils 
 import numpy as np
 import matplotlib.pyplot as plt
-import time
 
 indexes = utils.selected2_indexes
 labels = utils.selected2_measure_names

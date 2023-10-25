@@ -1,5 +1,5 @@
 """
-E3, E4 - selekcja k-best + klasyfikacja + zapis f-test anova - real
+E3, E4 - select k-best + classification + f-test anova --- Real-world streams
 """
 import numpy as np
 from sklearn import clone

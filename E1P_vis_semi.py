@@ -1,5 +1,5 @@
 """
-E1 - scatterplot - semi
+E1 - scatterplot - semi-synthetic streams
 """
 
 import utils
@@ -45,7 +45,6 @@ for m_id, m in enumerate(measures):
             for drf_id, drf in enumerate(['nearest', 'cubic']):
                 X, y = res_iter[drf_id,:,:-1], res_iter[drf_id,:,-1]
                     
-                #EH
                 X[np.isnan(X)]=1
                 names = [n[:6] for n in utils.measure_labels[m_id]]
 

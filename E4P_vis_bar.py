@@ -1,3 +1,6 @@
+"""
+Visualization for E4
+"""
 from matplotlib.lines import Line2D
 import numpy as np
 import matplotlib.pyplot as plt

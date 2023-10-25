@@ -1,11 +1,10 @@
 """
-E1 - scatterplot - syntetyczne
+E1 - scatterplot - synthetic streams
 """
 
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.feature_selection import SelectKBest
-from sklearn.neural_network import MLPClassifier
 import utils
 import matplotlib
 from sklearn.decomposition import PCA
@@ -40,7 +39,6 @@ for m_id, m in enumerate(measures):
         for drf_id, drf in enumerate(['sudd', 'inc', 'grad']):
             X, y = res_iter[drf_id,:,:-1], res_iter[drf_id,:,-1]
                 
-            #EH
             X[np.isnan(X)]=1
             names = [n[:6] for n in utils.measure_labels[m_id]]
 

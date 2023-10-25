@@ -1,5 +1,5 @@
 """
-Plot E2 - synthetic
+Plot E2 - Visualize classification results for  synthetic streams
 """
 import numpy as np
 import matplotlib.pyplot as plt

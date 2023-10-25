@@ -1,7 +1,6 @@
 """
 Plot.
-
-E3, E4 - selekcja k-best + ANOVA - real
+E3, E4 - Visualize -- select k-best + classification + f-test anova --- Real-world streams
 """
 
 import numpy as np
@@ -80,9 +79,7 @@ labels_ids = np.array(sum(labels_ids, []))[sort_order]
 
 labels_measures = np.array(sum(labels_measures, []))
 
-# cols=np.array(['r','g','b','gold','purple'])
 cols=c
-
 
 fig, ax = plt.subplots(1,1,figsize=(9,9/1.618), sharex=True, sharey=True)
 

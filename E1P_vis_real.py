@@ -1,11 +1,9 @@
 """
-E1 - scatterplot - rzeczywiste
+E1 - scatterplot - real-world streams
 """
 
 import matplotlib.pyplot as plt
 import numpy as np
-from sklearn.feature_selection import SelectKBest
-from sklearn.neural_network import MLPClassifier
 import utils
 import matplotlib
 from sklearn.decomposition import PCA
@@ -67,7 +65,6 @@ for f_id in range(len(real_streams)):
         X = X[perm]
         y = np.array(y)[perm]
           
-        #EH
         X[np.isnan(X)]=1
         X[np.isinf(X)]=1
         names = [n[:6] for n in utils.measure_labels[m_id]]

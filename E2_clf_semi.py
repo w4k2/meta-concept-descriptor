@@ -1,5 +1,5 @@
 """
-E2 - klasyfikacja semi
+E2 - classification for semi-synthetic streams
 """
 
 import numpy as np

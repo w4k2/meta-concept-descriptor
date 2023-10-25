@@ -1,5 +1,5 @@
 """
-Plot E2 - real
+Plot E2 - Visualize classification results for real-world streams
 """
 import numpy as np
 import matplotlib.pyplot as plt

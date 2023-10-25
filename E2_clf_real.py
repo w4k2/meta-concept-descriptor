@@ -1,5 +1,5 @@
 """
-E2 - klasyfikacja rzeczywistych
+E2 - classification for real-world streams 
 """
 
 import numpy as np

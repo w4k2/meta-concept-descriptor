@@ -1,5 +1,5 @@
 """
-E4 - klasyfikacja syntetycznych, ale tylko dla 17 wybranych metryk
+E4 - classification with reduced number of measures -- synthetic streams
 """
 
 import numpy as np

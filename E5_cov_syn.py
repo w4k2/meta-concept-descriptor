@@ -1,7 +1,5 @@
 """
-Obliczenia + Plot.
-
-E5 - sythetic
+E5 - experiment and presentation -- synthetic streams
 """
 import utils 
 import numpy as np

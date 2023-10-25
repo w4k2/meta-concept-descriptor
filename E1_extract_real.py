@@ -1,5 +1,5 @@
 """
-Experiment 1 -- collect streams and metafetaures -- real-world
+Experiment 1 -- collect streams and metafetaures -- real-world streams
 """
 import numpy as np
 from pymfe.mfe import MFE
