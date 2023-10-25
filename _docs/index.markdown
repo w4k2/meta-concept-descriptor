@@ -48,6 +48,14 @@ The last experiment was aimed at analyzing the covariance of selected metaattrib
 
 The experiment was to determine whether it was possible to exclude some of the analyzed measures based on their correlation. Reducing the number of metaattributes taken into account could, in practical applications, reduce the computational complexity of methods determining their values for the purpose of the concept identification task, without negatively affecting the quality of recognition. In this experiment, streams from three sources will be analyzed, which will allow determining differences and similarities in metaattribute values in changing concepts.
 
+## [Metafeatures] – List of considered metafeatures
+
+The description is based on the docummentation of [pymfe](https://pymfe.readthedocs.io/en/latest/) and [problexity](https://problexity.readthedocs.io/en/latest/index.html) libraries.
+
+## [Drift annotation] – Drift annotation procedure
+
+Real concept drifts are associated with a change (usually a decrease) in the quality of the classification achieved by the classifier. If the classifier was trained using data from a concept other than the current one, its recognition quality should decrease, as the classifier is not *familiar* with the current data deistribution. If an increase in quality is observed, it can be suspected that the data distribution is close to the previous concept and there are fewer samples in areas of overlap between class samples - which is also related to the change in concept.
+
 ----
 
 [Experiment 1]: docs/e1/e1
@@ -55,3 +63,5 @@ The experiment was to determine whether it was possible to exclude some of the a
 [Experiment 3]: docs/e3/e3
 [Experiment 4]: docs/e4/e4
 [Experiment 5]: docs/e5/e5
+[Metafeatures]: docs/ot/cm
+[Drift annotation]: docs/ot/da
