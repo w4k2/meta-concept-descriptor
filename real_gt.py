@@ -1,13 +1,13 @@
 """
 Script for detecting and marking moments of drift for real-world datastreams.
 """
-
 import numpy as np
 import strlearn as sl
 import matplotlib.pyplot as plt
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neural_network import MLPClassifier
 from tqdm import tqdm
+from utils import ELMI
 
 real_streams = [
     'data/real_streams/covtypeNorm-1-2vsAll-pruned.arff',
@@ -84,19 +84,16 @@ for f_id, f in enumerate(real_streams):
     if f_id==5:
         drfs=[9,35,60,180,220]
         
-    clf = [GaussianNB(), MLPClassifier()]
+    clf = [GaussianNB(), MLPClassifier(), ELMI()]
     
     evaluator = sl.evaluators.TestThenTrain()
     evaluator.process(stream, clf)
     
-    if f_id == 2:
-        fig, ax = plt.subplots(2,1,figsize=(13,7))
-    else:
-        fig, ax = plt.subplots(2,1,figsize=(7,7))
+    fig, ax = plt.subplots(2,1,figsize=(14,7))
     
     for i in range(len(clf)):
-        ax[0].scatter(np.arange(len(evaluator.scores[i,:,1])),evaluator.scores[i,:,1], alpha=0.9, label=['GNB', 'MLP'][i], c=['blue','tomato'][i],s=3)
-        ax[1].plot(evaluator.scores[i,:,1], alpha=0.9, label=['GNB', 'MLP'][i], c=['blue','tomato'][i],lw=1)
+        ax[0].scatter(np.arange(len(evaluator.scores[i,:,1])),evaluator.scores[i,:,1], alpha=0.9, label=['GNB', 'MLP', 'ELM'][i], c=['blue', 'gold', 'tomato'][i],s=3)
+        ax[1].plot(evaluator.scores[i,:,1], alpha=0.7, label=['GNB', 'MLP', 'ELM'][i], c=['blue', 'gold', 'tomato'][i],lw = 1 if f_id==2 else 2)
     for aa in ax:
         aa.spines['top'].set_visible(False)
         aa.spines['right'].set_visible(False)
