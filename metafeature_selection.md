@@ -1,6 +1,6 @@
 # Selection of metafeatures for effective concept identification
 
-The selection was based on Analysis of Variance (Experiment 4) and the ranking of mean (accumulated for synthetic and semi-synthetic streams) F-statistic.
+The selection was based on output of Experiment 4 and the ranking of mean (accumulated for synthetic and semi-synthetic streams) F-statistic.
 
 The F-statistic, descibing the importance of each metafeature in the concept recognition task, was calculated for each stream. The values were accumulated for each stream type and sorted. 
 
