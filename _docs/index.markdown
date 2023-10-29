@@ -56,6 +56,13 @@ The description is based on the docummentation of [pymfe](https://pymfe.readthed
 
 Real concept drifts are associated with a change (usually a decrease) in the quality of the classification achieved by the classifier. If the classifier was trained using data from a concept other than the current one, its recognition quality should decrease, as the classifier is not *familiar* with the current data deistribution. If an increase in quality is observed, it can be suspected that the data distribution is close to the previous concept and there are fewer samples in areas of overlap between class samples - which is also related to the change in concept.
 
+## [Metafeature selection] – Selection of metafeatures for effective concept identification
+
+The selection was based on output of Experiment 4 and the ranking of mean (accumulated for synthetic and semi-synthetic streams) F-statistic.
+
+The F-statistic, descibing the importance of each metafeature in the concept recognition task, was calculated for each stream. The values were accumulated for each stream type and sorted. 
+
+
 ----
 
 [Experiment 1]: docs/e1/e1
@@ -65,3 +72,4 @@ Real concept drifts are associated with a change (usually a decrease) in the qua
 [Experiment 5]: docs/e5/e5
 [Metafeatures]: docs/ot/cm
 [Drift annotation]: docs/ot/da
+[Metafeature selection]: docs/ot/sm

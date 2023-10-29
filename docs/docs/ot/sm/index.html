@@ -109,13 +109,13 @@
             <svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg>
           </a><a href="/meta-concept-descriptor/docs/e3/e3/" class="nav-list-link">Experiment 3</a><ul class="nav-list "></ul></li><li class="nav-list-item"><a href="#" class="nav-list-expander" aria-label="toggle links in Experiment 4 category">
             <svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg>
-          </a><a href="/meta-concept-descriptor/docs/e4/e4/" class="nav-list-link">Experiment 4</a><ul class="nav-list "></ul></li><li class="nav-list-item active"><a href="#" class="nav-list-expander" aria-label="toggle links in Experiment 5 category">
+          </a><a href="/meta-concept-descriptor/docs/e4/e4/" class="nav-list-link">Experiment 4</a><ul class="nav-list "></ul></li><li class="nav-list-item"><a href="#" class="nav-list-expander" aria-label="toggle links in Experiment 5 category">
             <svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg>
-          </a><a href="/meta-concept-descriptor/docs/e5/e5/" class="nav-list-link active">Experiment 5</a><ul class="nav-list "></ul></li><li class="nav-list-item"><a href="#" class="nav-list-expander" aria-label="toggle links in List of considered metafeatures category">
+          </a><a href="/meta-concept-descriptor/docs/e5/e5/" class="nav-list-link">Experiment 5</a><ul class="nav-list "></ul></li><li class="nav-list-item"><a href="#" class="nav-list-expander" aria-label="toggle links in List of considered metafeatures category">
             <svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg>
-          </a><a href="/meta-concept-descriptor/docs/ot/cm/" class="nav-list-link">List of considered metafeatures</a><ul class="nav-list "></ul></li><li class="nav-list-item"><a href="#" class="nav-list-expander" aria-label="toggle links in Metafeature selection category">
+          </a><a href="/meta-concept-descriptor/docs/ot/cm/" class="nav-list-link">List of considered metafeatures</a><ul class="nav-list "></ul></li><li class="nav-list-item active"><a href="#" class="nav-list-expander" aria-label="toggle links in Metafeature selection category">
             <svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg>
-          </a><a href="/meta-concept-descriptor/docs/ot/sm/" class="nav-list-link">Metafeature selection</a><ul class="nav-list "></ul></li></ul>
+          </a><a href="/meta-concept-descriptor/docs/ot/sm/" class="nav-list-link active">Metafeature selection</a><ul class="nav-list "></ul></li></ul>
       <ul class="nav-list"><li class="nav-list-item external">
               <a href="https://github.com/w4k2/meta-concept-descriptor" class="nav-list-link external">
                 Experimental sources
@@ -172,20 +172,129 @@
         
       
       <div id="main-content" class="main-content" role="main">
-        <h2 id="experiment-5--covariance-analysis-of-selected-metafeatures">Experiment 5 – Covariance analysis of selected metafeatures</h2>
+        <h1 id="selection-of-metafeatures-for-effective-concept-identification">Selection of metafeatures for effective concept identification</h1>
 
-<p>The last experiment was aimed at analyzing the covariance of selected metaattributes. The experiment was divided into two parts – the study of the covariance of the entire set describing the data stream, and the successive fragments of the stream in windows of 25 chunks. Both the covariance over the entire stream and the standard deviation of the covariance of features from successive windows were analyzed.</p>
+<p>The selection was based on output of Experiment 4 and the ranking of mean (accumulated for synthetic and semi-synthetic streams) F-statistic.</p>
 
-<p>The experiment was to determine whether it was possible to exclude some of the analyzed measures based on their correlation. Reducing the number of metaattributes taken into account could, in practical applications, reduce the computational complexity of methods determining their values for the purpose of the concept identification task, without negatively affecting the quality of recognition. In this experiment, streams from three sources will be analyzed, which will allow determining differences and similarities in metaattribute values in changing concepts.</p>
+<p>The F-statistic, descibing the importance of each metafeature in the concept recognition task, was calculated for each stream. The values were accumulated for each stream type and sorted.</p>
 
-<h2 id="synthetic">Synthetic</h2>
-<p><img src="/meta-concept-descriptor/fig_clf/cov_syn.png" alt="" /></p>
+<p>The ranks, defined as the order of sorted, accumulated F-statistics values, had the most significant impact on the selection of metafeatures. Moreover, the diversity of the groups from which the metafeatures were selected was taken into account, trying to avoid combinations that strongly correlated with each other (e.g. C1 and C2 from complexity category, which both express imbalance ratio). The largest pool of metafeatures was determined based on rankings for real-world streams, assuming that they best represent real applications of stream processing methods.</p>
 
-<h2 id="semi-synthetic">Semi-synthetic</h2>
-<p><img src="/meta-concept-descriptor/fig_clf/cov_semi.png" alt="" /></p>
+<div class="table-wrapper"><table>
+  <thead>
+    <tr>
+      <th>Metafeature</th>
+      <th>Rank in synthetic</th>
+      <th>Rank in semi-synthetic</th>
+      <th>Rank in real-world</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>int</td>
+      <td>—</td>
+      <td>—</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>nre</td>
+      <td>—</td>
+      <td>—</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>c1</td>
+      <td>—</td>
+      <td>—</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>f1.mean</td>
+      <td>5</td>
+      <td>—</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td>cl_c.mean</td>
+      <td>—</td>
+      <td>—</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>cl_c.sd</td>
+      <td>—</td>
+      <td>—</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>cl_ent</td>
+      <td>—</td>
+      <td>—</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>j_ent.mean</td>
+      <td>—</td>
+      <td>—</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>j_ent.sd</td>
+      <td>—</td>
+      <td>—</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>mi.mean</td>
+      <td>—</td>
+      <td>—</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <td>mi.sd</td>
+      <td>—</td>
+      <td>—</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <td>wn.mean</td>
+      <td>—</td>
+      <td>—</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <td>g_m.mean</td>
+      <td>—</td>
+      <td>—</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <td>mean.mean</td>
+      <td>1</td>
+      <td>1</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <td>mean.sd</td>
+      <td>4</td>
+      <td>—</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td>med.mean</td>
+      <td>3</td>
+      <td>3</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td>t_m.mean</td>
+      <td>2</td>
+      <td>2</td>
+      <td>—</td>
+    </tr>
+  </tbody>
+</table></div>
 
-<h2 id="real">Real</h2>
-<p><img src="/meta-concept-descriptor/fig_clf/cov_real.png" alt="" /></p>
 
 
 
@@ -213,7 +322,7 @@
                 
                 
                   <p class="text-small text-grey-dk-000 mb-0">
-                    <a href="https://github.com/just-the-docs/just-the-docs/tree/main/docs/e5/e5.md" id="edit-this-page">Edit this page on GitHub</a>
+                    <a href="https://github.com/just-the-docs/just-the-docs/tree/main/docs/ot/sm.md" id="edit-this-page">Edit this page on GitHub</a>
                   </p>
                 
               </div>

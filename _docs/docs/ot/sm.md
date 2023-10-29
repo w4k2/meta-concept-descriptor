@@ -1,3 +1,9 @@
+---
+layout: page
+title:  "Metafeature selection"
+has_children: true
+---
+
 # Selection of metafeatures for effective concept identification
 
 The selection was based on output of Experiment 4 and the ranking of mean (accumulated for synthetic and semi-synthetic streams) F-statistic.

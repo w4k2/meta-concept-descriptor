@@ -300,131 +300,149 @@
     "relUrl": "/#drift-annotation--drift-annotation-procedure"
   },"50": {
     "doc": "Home",
+    "title": "Metafeature selection – Selection of metafeatures for effective concept identification",
+    "content": "The selection was based on output of Experiment 4 and the ranking of mean (accumulated for synthetic and semi-synthetic streams) F-statistic. The F-statistic, descibing the importance of each metafeature in the concept recognition task, was calculated for each stream. The values were accumulated for each stream type and sorted. ",
+    "url": "/meta-concept-descriptor/#metafeature-selection--selection-of-metafeatures-for-effective-concept-identification",
+    "relUrl": "/#metafeature-selection--selection-of-metafeatures-for-effective-concept-identification"
+  },"51": {
+    "doc": "Home",
     "title": "Home",
     "content": " ",
     "url": "/meta-concept-descriptor/",
     "relUrl": "/"
-  },"51": {
+  },"52": {
     "doc": "Information theory",
     "title": "info-theory",
     "content": " ",
     "url": "/meta-concept-descriptor/docs/e1/info-theory/#info-theory",
     "relUrl": "/docs/e1/info-theory/#info-theory"
-  },"52": {
+  },"53": {
     "doc": "Information theory",
     "title": "Synthetic",
     "content": "Gradual . Incremental . Sudden . ",
     "url": "/meta-concept-descriptor/docs/e1/info-theory/#synthetic",
     "relUrl": "/docs/e1/info-theory/#synthetic"
-  },"53": {
+  },"54": {
     "doc": "Information theory",
     "title": "Semi-synthetic",
     "content": "Cubic . Nearest . ",
     "url": "/meta-concept-descriptor/docs/e1/info-theory/#semi-synthetic",
     "relUrl": "/docs/e1/info-theory/#semi-synthetic"
-  },"54": {
+  },"55": {
     "doc": "Information theory",
     "title": "Real",
     "content": ". ",
     "url": "/meta-concept-descriptor/docs/e1/info-theory/#real",
     "relUrl": "/docs/e1/info-theory/#real"
-  },"55": {
+  },"56": {
     "doc": "Information theory",
     "title": "Information theory",
     "content": " ",
     "url": "/meta-concept-descriptor/docs/e1/info-theory/",
     "relUrl": "/docs/e1/info-theory/"
-  },"56": {
+  },"57": {
     "doc": "Itemset",
     "title": "Itemset",
     "content": " ",
     "url": "/meta-concept-descriptor/docs/e1/itemset/",
     "relUrl": "/docs/e1/itemset/"
-  },"57": {
+  },"58": {
     "doc": "Itemset",
     "title": "Synthetic",
     "content": "Gradual . Incremental . Sudden . ",
     "url": "/meta-concept-descriptor/docs/e1/itemset/#synthetic",
     "relUrl": "/docs/e1/itemset/#synthetic"
-  },"58": {
+  },"59": {
     "doc": "Itemset",
     "title": "Semi-synthetic",
     "content": "Cubic . Nearest . ",
     "url": "/meta-concept-descriptor/docs/e1/itemset/#semi-synthetic",
     "relUrl": "/docs/e1/itemset/#semi-synthetic"
-  },"59": {
+  },"60": {
     "doc": "Itemset",
     "title": "Real",
     "content": ". ",
     "url": "/meta-concept-descriptor/docs/e1/itemset/#real",
     "relUrl": "/docs/e1/itemset/#real"
-  },"60": {
+  },"61": {
     "doc": "Landmarking",
     "title": "Landmarking",
     "content": " ",
     "url": "/meta-concept-descriptor/docs/e1/landmarking/",
     "relUrl": "/docs/e1/landmarking/"
-  },"61": {
+  },"62": {
     "doc": "Landmarking",
     "title": "Synthetic",
     "content": "Gradual . Incremental . Sudden . ",
     "url": "/meta-concept-descriptor/docs/e1/landmarking/#synthetic",
     "relUrl": "/docs/e1/landmarking/#synthetic"
-  },"62": {
+  },"63": {
     "doc": "Landmarking",
     "title": "Semi-synthetic",
     "content": "Cubic . Nearest . ",
     "url": "/meta-concept-descriptor/docs/e1/landmarking/#semi-synthetic",
     "relUrl": "/docs/e1/landmarking/#semi-synthetic"
-  },"63": {
+  },"64": {
     "doc": "Landmarking",
     "title": "Real",
     "content": ". ",
     "url": "/meta-concept-descriptor/docs/e1/landmarking/#real",
     "relUrl": "/docs/e1/landmarking/#real"
-  },"64": {
+  },"65": {
     "doc": "Model-based",
     "title": "Model-based",
     "content": " ",
     "url": "/meta-concept-descriptor/docs/e1/model-based/",
     "relUrl": "/docs/e1/model-based/"
-  },"65": {
+  },"66": {
     "doc": "Model-based",
     "title": "Synthetic",
     "content": "Gradual . Incremental . Sudden . ",
     "url": "/meta-concept-descriptor/docs/e1/model-based/#synthetic",
     "relUrl": "/docs/e1/model-based/#synthetic"
-  },"66": {
+  },"67": {
     "doc": "Model-based",
     "title": "Semi-synthetic",
     "content": "Cubic . Nearest . ",
     "url": "/meta-concept-descriptor/docs/e1/model-based/#semi-synthetic",
     "relUrl": "/docs/e1/model-based/#semi-synthetic"
-  },"67": {
+  },"68": {
     "doc": "Model-based",
     "title": "Real",
     "content": ". ",
     "url": "/meta-concept-descriptor/docs/e1/model-based/#real",
     "relUrl": "/docs/e1/model-based/#real"
-  },"68": {
+  },"69": {
+    "doc": "Metafeature selection",
+    "title": "Selection of metafeatures for effective concept identification",
+    "content": "The selection was based on output of Experiment 4 and the ranking of mean (accumulated for synthetic and semi-synthetic streams) F-statistic. The F-statistic, descibing the importance of each metafeature in the concept recognition task, was calculated for each stream. The values were accumulated for each stream type and sorted. The ranks, defined as the order of sorted, accumulated F-statistics values, had the most significant impact on the selection of metafeatures. Moreover, the diversity of the groups from which the metafeatures were selected was taken into account, trying to avoid combinations that strongly correlated with each other (e.g. C1 and C2 from complexity category, which both express imbalance ratio). The largest pool of metafeatures was determined based on rankings for real-world streams, assuming that they best represent real applications of stream processing methods. | Metafeature | Rank in synthetic | Rank in semi-synthetic | Rank in real-world | . | int | — | — | 4 | . | nre | — | — | 5 | . | c1 | — | — | 7 | . | f1.mean | 5 | — | 10 | . | cl_c.mean | — | — | 3 | . | cl_c.sd | — | — | 8 | . | cl_ent | — | — | 6 | . | j_ent.mean | — | — | 2 | . | j_ent.sd | — | — | 1 | . | mi.mean | — | — | 13 | . | mi.sd | — | — | 9 | . | wn.mean | — | — | 16 | . | g_m.mean | — | — | 15 | . | mean.mean | 1 | 1 | 12 | . | mean.sd | 4 | — | — | . | med.mean | 3 | 3 | — | . | t_m.mean | 2 | 2 | — | . ",
+    "url": "/meta-concept-descriptor/docs/ot/sm/#selection-of-metafeatures-for-effective-concept-identification",
+    "relUrl": "/docs/ot/sm/#selection-of-metafeatures-for-effective-concept-identification"
+  },"70": {
+    "doc": "Metafeature selection",
+    "title": "Metafeature selection",
+    "content": " ",
+    "url": "/meta-concept-descriptor/docs/ot/sm/",
+    "relUrl": "/docs/ot/sm/"
+  },"71": {
     "doc": "Statistical",
     "title": "Statistical",
     "content": " ",
     "url": "/meta-concept-descriptor/docs/e1/statistical/",
     "relUrl": "/docs/e1/statistical/"
-  },"69": {
+  },"72": {
     "doc": "Statistical",
     "title": "Synthetic",
     "content": "Gradual . Incremental . Sudden . ",
     "url": "/meta-concept-descriptor/docs/e1/statistical/#synthetic",
     "relUrl": "/docs/e1/statistical/#synthetic"
-  },"70": {
+  },"73": {
     "doc": "Statistical",
     "title": "Semi-synthetic",
     "content": "Cubic . Nearest . ",
     "url": "/meta-concept-descriptor/docs/e1/statistical/#semi-synthetic",
     "relUrl": "/docs/e1/statistical/#semi-synthetic"
-  },"71": {
+  },"74": {
     "doc": "Statistical",
     "title": "Real",
     "content": ". ",

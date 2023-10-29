@@ -113,7 +113,9 @@
             <svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg>
           </a><a href="/meta-concept-descriptor/docs/e5/e5/" class="nav-list-link">Experiment 5</a><ul class="nav-list "></ul></li><li class="nav-list-item"><a href="#" class="nav-list-expander" aria-label="toggle links in List of considered metafeatures category">
             <svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg>
-          </a><a href="/meta-concept-descriptor/docs/ot/cm/" class="nav-list-link">List of considered metafeatures</a><ul class="nav-list "></ul></li></ul>
+          </a><a href="/meta-concept-descriptor/docs/ot/cm/" class="nav-list-link">List of considered metafeatures</a><ul class="nav-list "></ul></li><li class="nav-list-item"><a href="#" class="nav-list-expander" aria-label="toggle links in Metafeature selection category">
+            <svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg>
+          </a><a href="/meta-concept-descriptor/docs/ot/sm/" class="nav-list-link">Metafeature selection</a><ul class="nav-list "></ul></li></ul>
       <ul class="nav-list"><li class="nav-list-item external">
               <a href="https://github.com/w4k2/meta-concept-descriptor" class="nav-list-link external">
                 Experimental sources
@@ -217,6 +219,12 @@
 <h2 id="drift-annotation--drift-annotation-procedure"><a href="docs/ot/da">Drift annotation</a> – Drift annotation procedure</h2>
 
 <p>Real concept drifts are associated with a change (usually a decrease) in the quality of the classification achieved by the classifier. If the classifier was trained using data from a concept other than the current one, its recognition quality should decrease, as the classifier is not <em>familiar</em> with the current data deistribution. If an increase in quality is observed, it can be suspected that the data distribution is close to the previous concept and there are fewer samples in areas of overlap between class samples - which is also related to the change in concept.</p>
+
+<h2 id="metafeature-selection--selection-of-metafeatures-for-effective-concept-identification"><a href="docs/ot/sm">Metafeature selection</a> – Selection of metafeatures for effective concept identification</h2>
+
+<p>The selection was based on output of Experiment 4 and the ranking of mean (accumulated for synthetic and semi-synthetic streams) F-statistic.</p>
+
+<p>The F-statistic, descibing the importance of each metafeature in the concept recognition task, was calculated for each stream. The values were accumulated for each stream type and sorted.</p>
 
 <hr />
 
