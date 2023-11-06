@@ -94,6 +94,6 @@ fig.colorbar(im, ax=axx[0,0], cax=cax_2)
 
 
 plt.tight_layout()
-plt.savefig('figures/fig_clf/cov_syn.png')
-plt.savefig('figures/fig_clf/cov_syn.eps')
+plt.savefig('figures/fig_clf/cov_moa.png')
+plt.savefig('figures/fig_clf/cov_moa.eps')
 plt.savefig('foo.png')
