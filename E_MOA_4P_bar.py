@@ -31,7 +31,6 @@ ax[-1].legend(custom_lines, legend_labels, ncol=5, frameon=False,  fontsize=11)
 
 row=0
 
-# Real    
 res = np.load('results/moa_clf_reduced.npy')
 for f_id, f in enumerate(streams):
             
