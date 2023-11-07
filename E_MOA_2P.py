@@ -29,14 +29,17 @@ stream_reps=5
 
 res = np.load('results/moa_clf.npy') # measures, datasets, reps, folds, clfs
 
-res_mean = np.mean(res, axis=2)
-print(res_mean.shape)
+print(res.shape)
+res = res.reshape(9,4,3,10,5)
 
-fig, ax = plt.subplots(4, 3, figsize=(10,20), sharex=True, sharey=True)
+res_mean = np.mean(res, axis=(2,3))
+
+
+fig, ax = plt.subplots(2, 2, figsize=(8,10), sharex=True, sharey=True)
 ax=ax.ravel()
 plt.suptitle('MOA', fontsize=18, y=0.99)
 
-for dataset_id, dataset in enumerate(streams):
+for dataset_id, dataset in enumerate(['RBF', 'LED', 'HYPERPLANE', 'SEA']):
         
     axx = ax[dataset_id]
     

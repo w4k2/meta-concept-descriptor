@@ -13,11 +13,11 @@ for i in range(12):
     res = np.load('results/combined_moa_%i.npy' % i)
     res_all.append(res)
 
-res = np.array(res_all).reshape(3,4,119,500)
-print(res.shape) # reps, types, features+label, chunks
+res = np.array(res_all).reshape(4,3,119,500)
+print(res.shape) # types, reps, features+label, chunks
 
 X = res[:,:,indexes]
-print(X.shape)# reps, types, selected features, chunks
+print(X.shape)# types, reps, selected features, chunks
 
 types = ['RBF', 'LED', 'HYPERPLANE', 'SEA']
 
@@ -33,7 +33,7 @@ for t in range(4):
 
     for rep in range(3):
         
-        X_all = X[rep, t]
+        X_all = X[t, rep]
         
         for a in range(len(labels)):
             X_all[a] -= np.mean(X_all[a])
@@ -69,7 +69,7 @@ for t in range(4):
         covs = []
         for rep in range(3):
             
-            X_temp = X_w[rep, t]
+            X_temp = X_w[t, rep]
             
             for a in range(len(labels)):
                 X_temp[a] -= np.mean(X_temp[a])
