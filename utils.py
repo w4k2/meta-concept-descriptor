@@ -42,7 +42,7 @@ measure_labels_selected = [
 
 measure_labels_selected_flat = np.array(sum(measure_labels_selected, []))
 
-selected2_measure_names_draft = ['mean.mean', 't_m.mean', 'med.mean', 'mean.sd', 'f1.mean', 'mi.mean', 'g_m.mean', 'wn.mean',
+selected2_measure_names_draft = ['mean.mean', 't_m.mean', 'med.mean', 'mean.sd', 'f1.mean', 'mi.mean', 'g_m.sd', 'wn.mean',
                            'j_ent.sd', 'j_ent.mean', 'cl_c.mean', 'int', 'nre', 'cl_ent', 'c1', 'cl_c.sd' ,'mi.sd']
 
 selected2_indexes = []

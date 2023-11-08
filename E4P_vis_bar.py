@@ -27,8 +27,8 @@ real_streams = [
 """
 Synthetic
 """
-clf = np.load('res_clf_cls/clf_sel.npy')
-reduced = np.load('res_clf_cls/clf_reduced.npy')
+clf = np.load('results/clf_sel.npy')
+reduced = np.load('results/clf_reduced.npy')
 print(reduced.shape) # 3, 5, 10, 5
 
 reduced_mean = np.mean(reduced, axis=(1,2))
@@ -56,7 +56,7 @@ for drf_id, drift_type in enumerate(['Sudden', 'Gradual', 'Incremental']):
                 ax[drf_id].text(_b, _a, "%+.3f" % (img[_a, _b]) , va='center', ha='center', c='black' if img[_a, _b]<0.5 else 'white', fontsize=11)
     
 plt.tight_layout()
-plt.savefig('fig_clf/reduced_syn.png')
+plt.savefig('figures/reduced_syn.png')
 plt.savefig('foo.png')
 
 """
@@ -65,8 +65,8 @@ Common
 fig, ax = plt.subplots(4,1,figsize=(13, 13))
 
 # Synthetic
-clf = np.load('res_clf_cls/clf_sel.npy')
-reduced = np.load('res_clf_cls/clf_reduced.npy')
+clf = np.load('results/clf_sel.npy')
+reduced = np.load('results/clf_reduced.npy')
 
 margin = .3
 w = .05
@@ -97,8 +97,8 @@ custom_lines = [Line2D([0], [0], color=legend_colors[i], lw=4) for i in range(le
 ax[0].legend(custom_lines, legend_labels, ncol=5, frameon=False, loc=5, fontsize=11)
 
 # Semi
-reduced = np.load('res_clf_cls/semi_clf_reduced.npy')
-clf = np.load('res_clf_cls/clf_sel_semi.npy')
+reduced = np.load('results/semi_clf_reduced.npy')
+clf = np.load('results/clf_sel_semi.npy')
 reduced_mean = np.mean(reduced, axis=2)
 
 for drf_id in range(2):
@@ -114,9 +114,9 @@ for drf_id in range(2):
     ax[1+drf_id].set_xticks([0,1,2,3,4,5], static_data)
 
 # Real    
-res = np.load('res_clf_cls/real_clf_reduced.npy')
+res = np.load('results/real_clf_reduced.npy')
 for f_id, f in enumerate(real_streams):
-    clf = np.load('res_clf_cls/clf_sel_real_%i.npy' % f_id)    
+    clf = np.load('results/clf_sel_real_%i.npy' % f_id)    
 
     reduced = np.mean(res[f_id], axis=0)
     full = np.mean(clf[-1], axis=0)
@@ -144,6 +144,6 @@ for aids, aa in enumerate(ax.ravel()):
     aa.spines['right'].set_visible(False)
 
 plt.tight_layout()
-plt.savefig('olaboga.png')
-plt.savefig('fig/reduced.png')
-plt.savefig('fig/reduced.eps')
+plt.savefig('foo.png')
+plt.savefig('figures/reduced.png')
+plt.savefig('figures/reduced.eps')

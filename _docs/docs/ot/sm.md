@@ -26,7 +26,7 @@ The ranks, defined as the order of sorted, accumulated F-statistics values, had 
 | mi.mean | --- | --- | 13 |
 | mi.sd | --- | --- | 9 |
 | wn.mean | --- | --- | 16 |
-| g_m.mean | --- | --- | 15 |
+| g_m.sd | --- | --- | 15 |
 | mean.mean | 1 | 1 | 12 |
 | mean.sd | 4 | --- | --- |
 | med.mean  | 3 | 3 | --- |
